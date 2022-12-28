@@ -1,0 +1,649 @@
+
+
+
+<!DOCTYPE html>
+    <html ng-app="fieldPageApp" ng-controller="mainController" lang="sl">
+<head>
+
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="wwwrootdist/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="wwwrootdist/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="wwwrootdist/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="wwwrootdist/favicon/manifest.json">
+    <link href="/StatWeb/BotDetectCaptcha.ashx?get=layout-stylesheet&amp;amp;t=1672236000" rel="stylesheet" type="text/css" />
+    <meta name="theme-color" content="#ffffff">
+    
+
+    <base href="/StatWeb/" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description=">
+    <meta name="keywords=">
+
+
+    
+
+        <title ng-bind="globalVariables.pageTitle()">   </title>
+
+    <link href="/StatWeb/wwwrootdist/css/CssBundle.css" type="text/css" rel="stylesheet" />
+    
+    <link href="/StatWeb/wwwrootdist/css/CssFieldBundle.css" type="text/css" rel="stylesheet" />
+
+    <script src="/StatWeb/wwwrootdist/js/modernizr-2.6.2.min.js"></script>
+    
+
+
+
+</head>
+<body id="body">
+    <div class="wrap">
+        <a id="skip-menu-link" class="skip-link skip-link-top" tabindex="0">Preskoči na vsebino</a>
+        
+<div id="header-ustanove">
+    <div class="dropdown surs-ustanove-dropdown pull-right">
+        <button class="btn btn-surs-institutions dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Državne ustanove
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="http://www.kpv.gov.si/si/" target="_self">Predsednik vlade</a></li>
+            <li><a href="http://www.vlada.si/" target="_self">Vlada RS</a></li>
+            <li><a href="http://www.vlada.si/o_vladi/ministrstva/" target="_self">Ministrstva</a></li>
+            <li><a href="http://www.up-rs.si/" target="_self">Predsednik RS</a></li>
+            <li><a href="http://www.dz-rs.si/wps/portal/Home/" target="_self">Državni zbor</a></li>
+            <li><a href="http://www.ds-rs.si/" target="_self">Državni svet</a></li>
+            <li><a href="http://www.us-rs.si/" target="_self">Ustavno sodišče</a></li>
+            <li><a href="http://www.sodisce.si/" target="_self">Vrhovna sodišča</a></li>
+            <li><a href="https://www.rs-rs.si/" target="_self">Računsko sodišče</a></li>
+            <li><a href="https://www.dodv-rs.si/" target="_self">Državno odvetništvo</a></li>
+            <li><a href="http://www.varuh-rs.si/" target="_self">Varuh človekovih pravic</a></li>
+            <li><a href="https://www.ip-rs.si/" target="_self">Informacijski pooblaščenec</a></li>
+            <li><a href="https://e-uprava.gov.si/" target="_self">eUprava</a></li>
+                <li><a href="http://www.upravneenote.gov.si/" target="_self">Portal upravnih enot</a></li>
+           
+
+        </ul>
+    </div>
+</div>
+
+        <div id="navbar" class="navbar navbar-default yamm surs-nav">
+            
+            
+            
+
+            <div class="navbar-header">
+                <div class="surs-brand-wrapper">
+                    <a href="/StatWeb/" id="surs-home" target="_self">
+
+                        <img src='/StatWeb/wwwrootdist/images/Logo_web_SLO.svg' alt="Statistični urad RS" class="surs-logo">
+                    </a>
+                </div>
+                <button type="button" aria-label="Menu" data-toggle="collapse" data-target="#navbar-collapse-grid-menu" class="navbar-toggle pull-left surs-toggle-menu"><span class="icon-menu-2 surs-navbar-glyph" aria-hidden="true"></span></button>
+
+            </div>
+            <div id="navbar-collapse-grid-menu" class="navbar-collapse collapse">
+                
+                <ul class="nav navbar-nav surs-nav-center">
+                    
+
+<li class="dropdown yamm-fw"  data-menu-order="first">
+    <a href="#" data-toggle="dropdown" class="dropdown-toggle">PODROČJA</a>
+
+    
+    
+
+    <ul class="dropdown-menu surs-dropdown-menu">
+        <li class="grid-demo">
+            <div class="container">
+                    <div class="col-sm-4">
+                            <div class="row">
+                                    <span class="icon-bdp-in-nacionalni-racuni surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/1" target="_self">BDP in nacionalni računi</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-cene-in-inflacija surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/2" target="_self">Cene in inflacija</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-virus surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/3162" target="_self">COVID-19</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-delo-in-brezposelnost surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/3" target="_self">Delo in brezposelnost</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-ekonomski-odnosi-s-tujino surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/4" target="_self">Ekonomski odnosi s tujino</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-energetika surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/5" target="_self">Energetika</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-gradbenistvo surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/6" target="_self">Gradbeništvo</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-industrija surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/7" target="_self">Industrija</a>                            </div>
+                    </div>
+                    <div class="col-sm-4">
+                            <div class="row">
+                                    <span class="icon-izobrazevanje surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/9" target="_self">Izobraževanje</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-kakovost-zivljenja surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/10" target="_self">Kakovost življenja</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-kmetijstvo-gozdarstvo-ribistvo surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/11" target="_self">Kmetijstvo, gozdarstvo, ribištvo</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-kultura-in-mediji surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/12" target="_self">Kultura</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-okolje surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/13" target="_self">Okolje</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-place surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/15" target="_self">Plače in stroški dela</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-podjetja surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/16" target="_self">Podjetja</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-prebivalstvo surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/17" target="_self">Prebivalstvo</a>                            </div>
+                    </div>
+                    <div class="col-sm-4">
+                            <div class="row">
+                                    <span class="icon-razvoj-in-tehnologija surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/25" target="_self">Razvoj in tehnologija</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-regionalni-pregled surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/20" target="_self">Regionalni pregled</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-socialna-zascita surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/21" target="_self">Socialna zaščita</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-transport surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/22" target="_self">Transport</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-trgovina-in-storitve surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/23" target="_self">Trgovina in storitve</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-turizem surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/Field/Index/24" target="_self">Turizem</a>                            </div>
+                            <div class="row">
+                                    <span class="icon-evropski-podatki surs-icon-medium" aria-hidden="true">
+                                    </span>
+<a class="surs-navigation-item-link" href="/StatWeb/StaticPages/Index/europeandata" target="_self">Evropski podatki</a>                            </div>
+                    </div>
+            </div>
+        </li>
+    </ul>
+</li>
+
+                    <li class="dropdown yamm-fw" >
+    <a href="#" data-toggle="dropdown" class="dropdown-toggle">PRODUKTI</a>
+
+    
+    
+
+    <ul class="dropdown-menu surs-dropdown-menu">
+        <li class="grid-demo">
+            <div class="container">
+                <div class="col-sm-4">
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="https://pxweb.stat.si" target="_self">Podatkovna baza SiStat</a>
+                        </div>
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="ReleaseCal" target="_self">Koledar objav</a>
+                        </div>
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="/StatWeb/Catalogue/Index" target="_self">Publikacije</a>
+                        </div>
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="Dashboard/Slovenia" target="_self">Slovenija interaktivno</a>
+                        </div>
+                </div>
+                <div class="col-sm-4">
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="https://www.stat.si/ImenaRojstva" target="_self">Imena in rojstni dnevi</a>
+                        </div>
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="https://www.stat.si/PopPiramida/Piramida2.asp" target="_self">Prebivalstvena piramida</a>
+                        </div>
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="https://www.stat.si/inflacija" target="_self">Inflacija</a>
+                        </div>
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="https://gis.stat.si" target="_self">Podatki v prostoru STAGE</a>
+                        </div>
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="https://www.stat.si/SKD" target="_self">Iskalnik SKD in CPA</a>
+                        </div>
+                </div>
+                <div class="col-sm-4">
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="https://www.stat.si/stedy/" target="_self">STEDy - spoznaj statistiko</a>
+                        </div>
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="https://www.stat.si/obcine" target="_self">Regije in občine v številkah</a>
+                        </div>
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="https://www.stat.si/KrajevnaImena" target="_self">Krajevna imena</a>
+                        </div>
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="https://www.stat.si/Pages/cilji" target="_self">Kazalniki SDG</a>
+                        </div>
+                        <div class="row">
+                            <a class="surs-navigation-item-link" href="https://igre.stat.si" target="_self">Junaki Slovenije</a>
+                        </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</li>
+
+                    <li class="dropdown yamm-fw" >
+    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+        VEČ 
+
+
+
+    </a>
+
+    
+    
+
+    <ul class="dropdown-menu  surs-dropdown-menu">
+      
+            <li class="grid-demo">
+                <div class="container">
+                    <div class="col-sm-4">
+                            <div class="row">
+                                <a class="surs-navigation-item-link" href="/StatWeb/SitefinityContentType/FromAToZ" target="_self">A do Ž</a>
+                            </div>
+                            <div class="row">
+                                <a class="surs-navigation-item-link" href="/StatWeb/Home/Contact" target="_self">Povpraševanje po podatkih</a>
+                            </div>
+                            <div class="row">
+                                <a class="surs-navigation-item-link" href="/StatWeb/SitefinityContentType/PressConferences" target="_self">Novinarske konference</a>
+                            </div>
+                            <div class="row">
+                                <a class="surs-navigation-item-link" href="/StatWeb/SitefinityContentType/Events" target="_self">Dogodki</a>
+                            </div>
+                    </div>
+                    <div class="col-sm-4">
+                            <div class="row">
+                                <a class="surs-navigation-item-link" href="/StatWeb/DataCollection" target="_self">Oddajanje podatkov</a>
+                            </div>
+                            <div class="row">
+                                <a class="surs-navigation-item-link" href="Methods/ClassificationsQuestionnairesMethods" target="_self">Klasifikacije, vprašalniki in metode</a>
+                            </div>
+                            <div class="row">
+                                <a class="surs-navigation-item-link" href="/StatWeb/StaticPages/Index/For-Researchers" target="_self">Za raziskovalce</a>
+                            </div>
+                    </div>
+                    <div class="col-sm-4">
+                            <div class="row">
+                                <a class="surs-navigation-item-link" href="AboutUs/AboutStatOffice" target="_self">O Statističnem uradu</a>
+                            </div>
+                            <div class="row">
+                                <a class="surs-navigation-item-link" href="NationalStatistics/SystemNatStat" target="_self">Sistem državne statistike</a>
+                            </div>
+                            <div class="row">
+                                <a class="surs-navigation-item-link" href="LegislationAndDocuments/LegisAndDocs" target="_self">Zakonodaja in dokumenti</a>
+                            </div>
+                            <div class="row">
+                                <a class="surs-navigation-item-link" href="FundamentalPrinciples/FundPrinc" target="_self">Temeljna načela delovanja</a>
+                            </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+</li>
+
+
+                    
+                </ul>
+
+                <ul class="nav navbar-nav surs-nav-right">
+                    <li>
+                        <a href="/StatWeb/Home/Contact" target="_self">KONTAKT</a>
+                    </li>
+                    <li class="lang">
+                        
+    <a data-collapse="true" href="{{ changeCultureUrl() }}" ng-cloak target="_self">
+        {{ otherCulture() }}
+    </a>
+
+                    </li>
+                </ul>
+            </div>
+            
+
+        </div>
+
+
+
+        
+
+        <div id="main-content">
+            <!--<div id="main-content" tabindex="-1">-->
+            
+
+
+<div ng-controller="fieldController">
+    <div class="container-fluid">
+        <div class="row row-field-related-fields">
+            <div class="container field-related-container" ng-cloak overflow-dots>
+                <div class="field-related-links hide-overflow">
+                    <a ng-repeat="p in states.relatedFields" emit-last-repeater-element href="{{getFieldUrl(p.Id)}}">
+                        <div class="field-related-item"
+                             ng-class="getFieldClass($index, p.Id)">
+                            {{p.Name}}
+
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="field-related-dots field-related-more">
+                    {{"MoreRelatedFields" | translate}}
+                    <span class="icon-arrow_down"></span>
+                </div>
+            </div>
+        </div>
+
+        <ng-view />
+    </div>
+</div>
+
+
+
+        </div>
+
+        <div class="surs-ontop-absolute surs-ontop" tabindex="0" title="Na vrh"><span class="icon-arrow-up ontop-arrow"></span></div>
+    </div>
+
+    
+    
+
+
+
+
+    
+
+<footer class="footer">
+    
+
+    <div class="container">
+        <div class="row surs-footer-row">
+            <div class="col-sm-4 col-xs-12">
+                <h1>Kontakt</h1>
+
+                <ul class="surs-footer-list">
+                    <li><a href="https://www.google.si/maps/place/Statisti%C4%8Dni+urad+Republike+Slovenije/@46.0823242,14.4942302,17z/data=!4m13!1m7!3m6!1s0x476532ce502f3eeb:0x40c69ef032953f47!2sLitostrojska+Cesta+54,+1000+Ljubljana!3b1!8m2!3d46.08232!4d14.496418!3m4!1s0x476532ceec83a109:0xf89c3f2cbeba11ec!8m2!3d46.0818006!4d14.4972484?hl=sl" target="_blank">Statistični urad RS<br/>
+Litostrojska cesta 54<br/>
+1000 Ljubljana</a></li>
+                    <li>
+                        <span>T: </span><a href="tel:+38612416400" class="contact-tel">(01) 241 64 00</a>
+                    </li>
+                    <li><span>E: </span> <a href="mailto:gp.surs@gov.si">gp.surs@gov.si</a> </li>
+                    <li class="li-highlightened"><a aria-label="Kontakt" href="/StatWeb/Home/Contact" class="highlighted" target="_self">Osebna izkaznica</a></li>
+                    <li class="li-social"><a aria-label="Twitter" href="https://twitter.com/statslovenija" target="_blank"><span class="icon-twitter surs-icon-footer surs-icon-tw-blue" aria-hidden="true"></span></a></li>
+                    <li class="li-social"><a aria-label="Facebook" href="https://www.facebook.com/StatSlovenija/" target="_blank"><span class="icon-fb surs-icon-footer surs-icon-fb-blue" aria-hidden="true"></span></a></li>
+                    <li class="li-social"><a aria-label="Instagram" href="https://www.instagram.com/statslovenija/" target="_blank"><span class="icon-instagram surs-icon-footer surs-icon-instagram" aria-hidden="true"></span></a></li>
+                    <li class="li-social"><a aria-label="Vimeo" href="https://vimeo.com/statslovenija/collections" target="_blank"><span class="icon-vimeo surs-icon-footer surs-icon-blue" aria-hidden="true"></span></a></li>
+                    <li class="li-social"><a aria-label="Rss" href="/StatWeb/Rss" target="_self"><span class="icon-rss surs-icon-footer surs-icon-orange" aria-hidden="true"></span></a></li>
+                    <li class="li-social"><a aria-label="Youtube" href="https://www.youtube.com/user/StatSlovenia/" target="_blank"><span class="icon-youtube surs-icon-footer surs-icon-youtube" aria-hidden="true"></span></a></li>
+                    <li class="li-social"><a aria-label="Youtube" href="https://www.linkedin.com/company/statisticni-urad-rs/" target="_blank"><span class="icon-linkedin surs-icon-footer surs-icon-linkedin" aria-hidden="true"></span></a></li>
+                </ul>
+
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <h1>Pooblaščeni izvajalci</h1>
+                <ul class="surs-footer-list">                        
+                    <li>
+                        <a href="https://www.bsi.si/" target="_blank">Banka Slovenije</a>
+                    </li>
+                       
+                    <li>
+                        <a href="http://www.nijz.si/" target="_blank">Nacionalni inštitut za javno zdravje</a>
+                    </li> 
+                </ul>
+
+                
+                <h1>Statistične organizacije</h1>
+                <ul class="surs-footer-list">
+                    <li>
+                        <a href="http://ec.europa.eu/eurostat" target="_blank">Eurostat</a>
+                    </li>
+                       
+                    <li>
+                        <a href="http://www.oecd.org/" target="_blank">OECD</a>
+                    </li>
+                      
+                    <li>
+                        <a href="http://www.unece.org/info/ece-homepage.html" target="_blank">UNECE</a>
+                    </li>
+                      
+                    <li>
+                        <a href="http://www.un.org/en/index.html" target="_blank">OZN</a>
+                    </li>
+                        
+                    <li>
+                        <a href="http://www.unece.org/stats/links.html" target="_blank">Tuji statistični uradi</a>
+                    </li>
+                       
+                    <li>
+                        <a href="http://www.stat-d.si/" target="_blank">Statistično društvo Slovenije</a>
+                    </li>
+                       
+                </ul>
+
+
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <h1>Izpostavljena vsebina</h1>
+                <ul class="surs-footer-list">
+
+                        <li>
+                            <a href="AboutUs/PublicInformation" target="_self">Katalog informacij javnega značaja</a>
+                        </li>
+
+                    <li>
+                        <a href="/StatWeb/Home/Sitemap" target="_self">Kazalo strani</a>
+                    </li>
+
+
+                    <li>
+                        <a href="/StatWeb/StaticPages/Index/Cookies"
+                           target="_self">Piškotki</a>
+                    </li>
+
+                    <li>
+                        <a href="/StatWeb/StaticPages/Index/accessibility"
+                           target="_self">Izjava o dostopnosti</a>
+                    </li>
+
+                    <li>
+                        <a href="/StatWeb/StaticPages/Index/Copyright" target="_self">
+                            Avtorske pravice
+                        </a>
+                    </li>
+
+                        <li>
+                            <a href="AboutUs/Recruitment" target="_self">Zaposlitev</a>
+                        </li>
+                </ul>
+
+                
+                <a href="" class="btn btn-footer" data-toggle="modal"
+                   data-target="#newsSubscriptionModal" 
+                   target="_self">
+                    Naročite se na objave
+                </a>
+
+
+</div>
+        </div>
+        <div class="row surs-row-copyright ">
+            <div class="col-sm-12 text-center">
+                <a href="/StatWeb/StaticPages/Index/Copyright" target="_self"> &#169; Statistični urad Republike Slovenije</a>
+</div>
+        </div>
+    </div>
+</footer>
+
+    
+
+    
+
+    
+    
+<div class="modal fade" id="newsSubscriptionModal" tabindex="-1" role="dialog">
+     
+    <div class="modal-dialog news-subs-modal" role="document">
+        <div class="modal-content">
+            <div class="modal-header newssub-modal-content">
+                <button type="button" class="close surs-close-button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title newssub-modal-title" id="newsSubscription">
+                    Naročilo na obveščanje o novih objavah
+                </h4>
+            </div>
+<form action="/StatWeb/News/Subscribe" data-ajax="true" data-ajax-method="POST" data-ajax-success="subscriptionRequestAdded(data)" id="form0" method="post"><input name="__RequestVerificationToken" type="hidden" value="YQrZ0hAFytwCQEdS6V3T98a16cOfDB3peLPRXLBHVH129dCf1LX7y4uRPyWQMhH8KOOozh4hjIKPrgIvD7NDtxqEQtjziXHbY8DAJynJZZQ1" />            <div class="modal-body newssub-modal-content">
+                <div class="news-subscription-message">
+                        
+                            Prosimo vas, da za prijavo na obveščanje o novih objavah vpišete svoj elektronski naslov
+                            ter ime in priimek.
+                        
+                </div>
+                <div>
+                    <p id="email_label" class="input-modal-label">E-naslov<font style="color:red"> *</font></p>
+                    <input aria-labelledby="email_label" class="form-control news-subscription-input" data-val="true" data-val-email="Neveljaven e-naslov." data-val-required="E-naslov je obvezen." id="Email" name="Email" type="text" value="" />
+                    <span class="field-validation-valid text-danger text-subscribe-error" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                </div>
+                <div class="first-last-name-wrapper">
+                    <p id="firstname_lastname_label"class="input-modal-label">Ime in priimek</p>
+                    <input aria-labelledby="firstname_lastname_label" class="form-control news-subscription-input news-subscription-name " id="FirstLastName" name="FirstLastName" type="text" value="" />
+                </div>
+                <div class="checkboxes-main-container">
+                    <div>
+                        Soglašam, da se moji osebni podatki uporabijo tudi:
+                    </div>
+                    <div class="subscribe-also-agree-checkboxes-wrapper">
+                        <div class="subscription-checkbox-container">
+                            <input aria-labelledby="survey_agreement_label" class="subscription-checkbox" data-val="true" data-val-required="The SurveyAgreement field is required." id="SurveyAgreement" name="SurveyAgreement" type="checkbox" value="true" /><input name="SurveyAgreement" type="hidden" value="false" /> <div id="survey_agreement_label" class="subscription-checkbox-text-holder">za prejemanje vabil k sodelovanju v anketah s področja zadovoljstva uporabnikov</div>
+                        </div>
+                        <div class="subscription-checkbox-container">
+                            <input aria-labelledby="questionaires_agreement_label" class="subscription-checkbox" data-val="true" data-val-required="The QuestionairesAgreement field is required." id="QuestionairesAgreement" name="QuestionairesAgreement" type="checkbox" value="true" /><input name="QuestionairesAgreement" type="hidden" value="false" /> <div id="questionaires_agreement_label" class="subscription-checkbox-text-holder">za prejemanje vabil k sodelovanju pri testiranjih vprašalnikov in produktov SURS</div>
+                        </div>
+                        <div class="subscription-checkbox-container">
+                            <input aria-labelledby="events_agreement_label" class="subscription-checkbox" data-val="true" data-val-required="The EventsAgreement field is required." id="EventsAgreement" name="EventsAgreement" type="checkbox" value="true" /><input name="EventsAgreement" type="hidden" value="false" /> <div id="events_agreement_label" class="subscription-checkbox-text-holder">za obveščanje o dogodkih in izobraževanjih, ki jih organizira in izvaja SURS</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p class="subscribe-read-more-text">Preberite si <a class="surs-about-link" target="_blank" href="https://www.stat.si/statweb/FundamentalPrinciples/PersData">Splošne informacije o varstvu osebnih podatkov</a></p>
+                </div>
+                <div class="subscribe-captcha-wrapper">
+
+                    
+
+
+  <div class="BDC_CaptchaDiv " id="SursSubscriptionCaptcha_CaptchaDiv" style="width: 280px !important; height: 50px !important; "><!--
+ --><div class="BDC_CaptchaImageDiv" id="SursSubscriptionCaptcha_CaptchaImageDiv" style="width: 250px !important; height: 50px !important;"><!--
+   --><div class="BDC_CaptchaImageDiv" style="width:250px; height:40px;"><img class="BDC_CaptchaImage" id="SursSubscriptionCaptcha_CaptchaImage" src="/StatWeb/BotDetectCaptcha.ashx?get=image&amp;c=SursSubscriptionCaptcha&amp;t=d5c86986f952475aa8a8394182479560" alt="Retype the CAPTCHA code from the image" style="" /></div><!--
+   --><a href="//captcha.org/captcha.html?asp.net" title="BotDetect CAPTCHA ASP.NET Form Validation" style="display: block !important; height: 10px !important; margin: 0 !important; padding: 0 !important; font-size: 9px !important; line-height: 10px !important; visibility: visible !important; font-family: Verdana, DejaVu Sans, Bitstream Vera Sans, Verdana Ref, sans-serif !important; vertical-align: middle !important; text-align: center !important; text-decoration: none !important; background-color: #f8f8f8 !important; color: #606060 !important;">BotDetect CAPTCHA ASP.NET Form Validation</a><!--
+ --></div><!--
+ --><div class="BDC_CaptchaIconsDiv" id="SursSubscriptionCaptcha_CaptchaIconsDiv" style="width: 24px !important;"><!--
+   --><a class="BDC_ReloadLink" id="SursSubscriptionCaptcha_ReloadLink" href="#" title="Change the CAPTCHA code"><img class="BDC_ReloadIcon" id="SursSubscriptionCaptcha_ReloadIcon" src="/StatWeb/BotDetectCaptcha.ashx?get=reload-icon" alt="Change the CAPTCHA code" /></a><!--
+   --><a class="BDC_SoundLink" id="SursSubscriptionCaptcha_SoundLink" href="/StatWeb/BotDetectCaptcha.ashx?get=sound&amp;c=SursSubscriptionCaptcha&amp;t=d5c86986f952475aa8a8394182479560&amp;s=Q03Tsyl1y1UOKXFBfzeK0igkiWaEmQwvibd2JdX6pk7fF1q8W%2f%2fkDBlvdJ6VOPlBr0mTK%2bTKva%2fZmi4xNugwfA%3d%3d" title="Speak the CAPTCHA code" rel="nofollow"><img class="BDC_SoundIcon" id="SursSubscriptionCaptcha_SoundIcon" src="/StatWeb/BotDetectCaptcha.ashx?get=sound-icon" alt="Speak the CAPTCHA code" /></a><!--
+   --><div class="BDC_Placeholder" id="SursSubscriptionCaptcha_AudioPlaceholder">&nbsp;</div><!--
+ --></div>
+    <script src="/StatWeb/BotDetectCaptcha.ashx?get=script-include&amp;c=SursSubscriptionCaptcha&amp;t=d5c86986f952475aa8a8394182479560" type="text/javascript"></script>
+    <input type="hidden" name="BDC_VCID_SursSubscriptionCaptcha" id="BDC_VCID_SursSubscriptionCaptcha" value="d5c86986f952475aa8a8394182479560" />
+    <input type="hidden" name="BDC_BackWorkaround_SursSubscriptionCaptcha" id="BDC_BackWorkaround_SursSubscriptionCaptcha" value="0" />
+    <input type="hidden" name="BDC_Hs_SursSubscriptionCaptcha" id="BDC_Hs_SursSubscriptionCaptcha" value="d2d57afd703e2d41d40884b8e9af399ff7c6139d" />
+    <input type="hidden" name="BDC_SP_SursSubscriptionCaptcha" id="BDC_SP_SursSubscriptionCaptcha" value="945162232" />
+  </div>
+
+
+                    <input id="CaptchaCode" name="CaptchaCode" type="text" value="" />
+                </div>
+                <div class="news-subscription-result">
+                </div>
+            </div>
+                <div class="modal-footer news-modal-footer subscribe-button-wrapper">
+                    <button type="submit" class="btn btn-primary nsub-btn nsub-btn-active">
+                        Naročam se na objave
+                    </button>
+                </div>
+</form>        </div>
+    </div>
+</div>
+
+
+
+    
+
+    <div class="surs-cookies-wrapper">
+        <div class="surs-cookie-container">
+            <div class="surs-cookies-text surs-cookie-text">
+                Spletno mesto Statističnega urada RS uporablja piškotke za analizo obiska ter za zagotavljanje spletne storitve in funkcionalnosti, saj teh brez piškotkov ne bi moglo nuditi. Ali se strinjate z namestitvijo piškotkov? &nbsp;
+                <a href="/StatWeb/StaticPages/Index/cookies">
+                    Več o piškotkih
+                </a>
+            </div>
+
+            
+            <div class="surs-cookies-button surs-cookie-text">
+                <button type="button" onclick="location.href='/StatWeb/Home/CookieAgreementAction?agreement=DontAgree'"
+                        class="btn btn-cookies surs-cookie-button-no">
+                    Ne strinjam se
+                </button>
+                <button type="button" onclick="location.href='/StatWeb/Home/CookieAgreementAction?agreement=Agree'"
+                        class="btn btn-cookies surs-cookie-button-yes">
+                    Strinjam se
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/StatWeb/wwwrootdist/js/JsBundle.js"></script>
+        <script src="/StatWeb/wwwrootdist/js/AngularBundle.js"></script>
+
+    
+    <script src="/StatWeb/wwwrootdist/js/AngularFieldBundle.js"> </script>
+
+    <script>
+        var lang = "sl";
+        setCurrentLang(lang);
+    </script>
+</body>
+
+<!-- Piwik -->
+<!-- End Piwik Code -->
+
+
+</html>
