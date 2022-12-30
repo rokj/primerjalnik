@@ -8,7 +8,7 @@ Spletna stran se nahaja na https://www.primerjalnik-cen.si
 
 # Ideja
 
-https://www.nasasuperhrana.si/primerjava-cen/ ... ?
+58k?  
 
 # Razvijalci
 
