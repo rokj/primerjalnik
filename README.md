@@ -23,7 +23,7 @@ Spletna stran se nahaja na https://www.primerjalnik-cen.si
 
 Na računalniku morate imeti nameščen python, flask in sqlite3.
 
-Ko imate kodo enkrat pri sebi, lahko zaženete strežnik z naslednjim ukazom:
+Ko imate kodo enkrat pri sebi, lahko zaženete strežnik z naslednjim ukazom:  
 `flask --app web run`
 
 # Uvoz podatkov (novih produktov, storitev, ...)
