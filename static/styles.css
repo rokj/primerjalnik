@@ -1,0 +1,13 @@
+#pc-chart {
+    width: 400px;
+    max-width: 400px;
+    height: 300px;
+    max-height: 300px;
+    display: block;
+}
+
+#select-product-wrapper {
+    max-width: 400px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+}
