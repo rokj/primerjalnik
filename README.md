@@ -10,7 +10,7 @@ Spletna stran se nahaja na https://www.primerjalnik-cen.si
 
 58k?  
 
-# Razvijalci
+# Razvojno okolje
 
 - python
 - flask
@@ -18,5 +18,15 @@ Spletna stran se nahaja na https://www.primerjalnik-cen.si
 - vannila js, dokler bo šlo
 - bootstrap
 - KISS
+
+# Uporaba lokalno
+
+Na računalniku morate imeti nameščen python, flask in sqlite3.
+
+Ko imate kodo enkrat pri sebi, lahko zaženete strežnik z naslednjim ukazom:
+`flask --app web run`
+
+# Uvoz podatkov (novih produktov, storitev, ...)
+
 
 
