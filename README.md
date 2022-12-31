@@ -19,7 +19,7 @@ Spletna stran se nahaja na https://www.primerjalnik-cen.si
 - bootstrap
 - KISS
 
-# Uporaba lokalno
+# Navodila za razvijalce
 
 Na računalniku morate imeti nameščen python, flask in sqlite3.
 
