@@ -1,13 +1,28 @@
+.container-fluid .row:nth-child(1) {
+    padding-top: 10%;
+}
+
+.container-fluid .row:nth-child(2) {
+    padding-top: 3%;
+}
+
 #pc-chart {
-    width: 400px;
-    max-width: 400px;
-    height: 300px;
-    max-height: 300px;
-    display: block;
 }
 
 #select-product-wrapper {
-    max-width: 400px;
-    margin-bottom: 30px;
-    padding-bottom: 30px;
+}
+
+#select-product-ts-control {
+}
+
+.ts-wrapper {
+    height: 50px;
+}
+
+.ts-control {
+    height: 50px;
+}
+
+.ts-control .item {
+    line-height: 31px;
 }

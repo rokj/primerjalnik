@@ -22,7 +22,7 @@ function changeProduct(productId) {
             label: '',
             data: prices,
             fill: false,
-            borderColor: 'rgb(126,126,126)',
+            borderColor: '#36a2eb',
             tension: 0.1
         }]
     };
@@ -35,14 +35,32 @@ function changeProduct(productId) {
                 legend: {
                     display: false
                 }
+            },
+            scales: {
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: "€"
+                    }
+                },
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: "datum"
+                    }
+                }
             }
         }
     };
 
+    /*
     document.getElementById("product-name").textContent = product["name"].substring(0, 40) + " ... ";
 
     let pricesTableBody = product["prices"].map(p => "<tr><td>" + p["price_date"] + "</td><td>" + p["price"] + "</td></tr>").join('');
     document.getElementById("product-prices").innerHTML = pricesTableBody;
+     */
 
     const ctx = document.getElementById('pc-chart');
     if (chart) {
@@ -53,11 +71,20 @@ function changeProduct(productId) {
 
 new TomSelect("#select-product", {
 	create: true,
+    responsive: true,
 	sortField: {
 		field: "text",
 		direction: "asc"
 	},
-    onChange: changeProduct
+    onChange: changeProduct,
+    render: {
+		option_create: function(data, escape) {
+			return '<div class="create">Dodaj <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+		},
+		no_results: function(data,escape){
+			return '<div class="no-results">Ni najdenih besed za "'+escape(data.input)+'"</div>';
+		},
+    }
 });
 
 let chart = null;

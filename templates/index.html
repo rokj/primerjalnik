@@ -23,39 +23,47 @@
     </script>
 </head>
 <body>
+    <div class="container-fluid">
+        <div class="row height d-flex justify-content-center align-items-center">
+            <div class="col-md-6">
+                <div id="select-product-wrapper">
+                    <select id="select-product" placeholder="Izberi artikel..." autocomplete="off" class="">
+                        <option value="">Izberi artikel...</option>
+                        {% for k, v in products.items() %}
+                            <option value="{{ v["id"] }}">{{ v["name"][:40] }} ... </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
 
-    <div id="select-product-wrapper">
-        <label>Išči:</label>
-        <select id="select-product" placeholder="Izberi artikel..." autocomplete="off">
-            <option value="">Izberi artikel...</option>
-            {% for k, v in products.items() %}
-                <option value="{{ v["id"] }}">{{ v["name"][:40] }} ... </option>
-            {% endfor %}
-        </select>
-    </div>
+        {% if product %}
+            <!--
+            <h1 id="product-name">{{ product["name"] }}</h1>
 
-
-    {% if product %}
-        <h1 id="product-name">{{ product["name"] }}</h1>
-
-        <table>
-            <thead>
-                <tr>
-                    <td>Datum</td>
-                    <td>Cena</td>
-                </tr>
-            </thead>
-            <tbody id="product-prices">
-                {% for price in product["prices"] %}
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ price["price_date"] }}</td>
-                        <td>{{ price["price"] }}</td>
+                        <td>Datum</td>
+                        <td>Cena</td>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
-
-    <canvas id="pc-chart" width="400" height="300"></canvas>
+                </thead>
+                <tbody id="product-prices">
+                    {% for price in product["prices"] %}
+                        <tr>
+                            <td>{{ price["price_date"] }}</td>
+                            <td>{{ price["price"] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            -->
+        {% endif %}
+        <div class="row height d-flex justify-content-center align-items-center">
+            <div class="col-md-6">
+                <canvas id="pc-chart" width="400" height="300"></canvas>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
