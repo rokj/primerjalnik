@@ -1,9 +1,13 @@
 .container-fluid .row:nth-child(1) {
-    padding-top: 10%;
+    padding-top: 5%;
+}
+
+.container-fluid .row:nth-child(2) {
+    text-align: center;
 }
 
 .container-fluid .row:nth-child(3) {
-    padding-top: 3%;
+    padding-top: 1%;
 }
 
 #pc-chart {
