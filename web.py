@@ -38,7 +38,7 @@ def query_db(query, args=(), one=False):
 @app.route("/")
 def index():
     # let us show something
-    tmp_products = query_db("select id, url, name from products")
+    tmp_products = query_db("select id, url, name from products where show = 1")
     products = {}
 
     for p in tmp_products:

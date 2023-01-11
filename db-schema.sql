@@ -44,5 +44,5 @@ insert into products(url, name, sync_from_internet) values ('https://www.stat.si
 insert into products(url, name, sync_from_internet) values ('https://www.stat.si/StatWeb/Field/Index/5/30?3', 'Cena zemeljskega plina za gospodinjstva', 0);
 insert into products(url, name, sync_from_internet) values ('https://www.stat.si/StatWeb/Field/Index/5/30?4', 'Cena zemeljskega plina za negospodinjstva', 0);
 
-insert into prices(product_id, price, price_date) values (select id from products where name = 'Cena električne energije za gospodinjstva', 0.12, '2022-08-22');
+alter table products add column show int default 1;
 
