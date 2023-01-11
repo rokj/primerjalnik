@@ -8,7 +8,7 @@ create table products (
 	store text,
 
 	created_at datetime default current_timestamp,
-    updated_at datetime default current_timestamp
+	updated_at datetime default current_timestamp
 );
 
 create table prices (
@@ -18,9 +18,9 @@ create table prices (
 	price_date date default current_date,
 
 	created_at datetime default current_timestamp,
-    updated_at datetime default current_timestamp,
-    foreign key (product_id) REFERENCES products(id),
-    unique(product_id, price_date) on conflict ignore
+	updated_at datetime default current_timestamp,
+	foreign key (product_id) REFERENCES products(id),
+	unique(product_id, price_date) on conflict ignore
 );
 
 insert into products(id, url, store) values (1, 'https://www.spar.si/online/ajdov-kruh-z-orehi-zito-400g/p/422108', 'spar');
@@ -30,9 +30,19 @@ insert into products(id, url, store) values (4, 'https://www.spar.si/online/traj
 insert into products(id, url, store) values (5, 'https://www.spar.si/online/mleto-goveje-meso-spar-480g/p/411702', 'spar');
 insert into products(id, url, store) values (6, 'https://www.spar.si/online/mleta-kava-classic-barcaffe-200g/p/311658', 'spar');
 
-insert into prices(product_id, price, price_date) values (1, 2.29, "2022-08-22");
-insert into prices(product_id, price, price_date) values (2, 0.74, "2022-08-22");
-insert into prices(product_id, price, price_date) values (3, 0.83, "2022-08-22");
-insert into prices(product_id, price, price_date) values (4, 1.09, "2022-08-22");
-insert into prices(product_id, price, price_date) values (5, 4.99, "2022-08-22");
-insert into prices(product_id, price, price_date) values (6, 2.99, "2022-08-22");
+insert into prices(product_id, price, price_date) values (1, 2.29, '2022-08-22');
+insert into prices(product_id, price, price_date) values (2, 0.74, '2022-08-22');
+insert into prices(product_id, price, price_date) values (3, 0.83, '2022-08-22');
+insert into prices(product_id, price, price_date) values (4, 1.09, '2022-08-22');
+insert into prices(product_id, price, price_date) values (5, 4.99, '2022-08-22');
+insert into prices(product_id, price, price_date) values (6, 2.99, '2022-08-22');
+
+alter table products add column sync_from_internet int default 1;
+
+insert into products(url, name, sync_from_internet) values ('https://www.stat.si/StatWeb/Field/Index/5/30?1', 'Cena električne energije za gospodinjstva', 0);
+insert into products(url, name, sync_from_internet) values ('https://www.stat.si/StatWeb/Field/Index/5/30?2', 'Cena električne energije za negospodinjstva', 0);
+insert into products(url, name, sync_from_internet) values ('https://www.stat.si/StatWeb/Field/Index/5/30?3', 'Cena zemeljskega plina za gospodinjstva', 0);
+insert into products(url, name, sync_from_internet) values ('https://www.stat.si/StatWeb/Field/Index/5/30?4', 'Cena zemeljskega plina za negospodinjstva', 0);
+
+insert into prices(product_id, price, price_date) values (select id from products where name = 'Cena električne energije za gospodinjstva', 0.12, '2022-08-22');
+

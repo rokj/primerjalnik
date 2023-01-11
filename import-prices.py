@@ -5,7 +5,7 @@ from pyquery import PyQuery
 
 db = sqlite3.connect('db.db')
 db.row_factory = sqlite3.Row
-cur = db.execute("select id, url, name, store from products")
+cur = db.execute("select id, url, name, store from products where sync_from_internet = 1")
 products = cur.fetchall()
 
 total = len(products)

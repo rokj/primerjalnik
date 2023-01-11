@@ -30,7 +30,7 @@
                     <select id="select-product" placeholder="Izberi artikel..." autocomplete="off" class="">
                         <option value="">Izberi artikel...</option>
                         {% for k, v in products.items() %}
-                            <option value="{{ v["id"] }}">{{ v["name"][:40] }} ... </option>
+                            <option value="{{ v["id"] }}">{{ v["name"] }} ... </option>
                         {% endfor %}
                     </select>
                 </div>
