@@ -45,7 +45,7 @@ for p in products:
 
         db.execute("insert into prices(product_id, price, price_date) values (?, ?, ?)", [
             p["id"],
-            product_price.text().replace("€", ""),
+            product_price.text().replace("€", "").replace(",", "."),
             datetime.date.today()
         ])
         db.commit()
