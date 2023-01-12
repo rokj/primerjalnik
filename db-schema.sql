@@ -23,12 +23,12 @@ create table prices (
 	unique(product_id, price_date) on conflict ignore
 );
 
-insert into products(id, url, store) values (1, 'https://www.spar.si/online/ajdov-kruh-z-orehi-zito-400g/p/422108', 'spar');
-insert into products(id ,url, store) values (2, 'https://www.spar.si/online/jabolka-gala-1kg/p/296981', 'spar');
-insert into products(id, url, store) values (3, 'https://www.spar.si/online/testenine-tortiglioni-spar-500g/p/493086', 'spar');
-insert into products(id, url, store) values (4, 'https://www.spar.si/online/trajno-mleko-35-mm-spar-1l/p/270241', 'spar');
-insert into products(id, url, store) values (5, 'https://www.spar.si/online/mleto-goveje-meso-spar-480g/p/411702', 'spar');
-insert into products(id, url, store) values (6, 'https://www.spar.si/online/mleta-kava-classic-barcaffe-200g/p/311658', 'spar');
+insert into products(id, url, store) values (1, 'https://www.spar.si/online/ajdov-kruh-z-orehi-zito-400g/p/422108', 'Špar');
+insert into products(id ,url, store) values (2, 'https://www.spar.si/online/jabolka-gala-1kg/p/296981', 'Špar');
+insert into products(id, url, store) values (3, 'https://www.spar.si/online/testenine-tortiglioni-spar-500g/p/493086', 'Špar');
+insert into products(id, url, store) values (4, 'https://www.spar.si/online/trajno-mleko-35-mm-spar-1l/p/270241', 'Špar');
+insert into products(id, url, store) values (5, 'https://www.spar.si/online/mleto-goveje-meso-spar-480g/p/411702', 'Špar');
+insert into products(id, url, store) values (6, 'https://www.spar.si/online/mleta-kava-classic-barcaffe-200g/p/311658', 'Špar');
 
 insert into prices(product_id, price, price_date) values (1, 2.29, '2022-08-22');
 insert into prices(product_id, price, price_date) values (2, 0.74, '2022-08-22');
