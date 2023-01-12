@@ -30,3 +30,7 @@
 .ts-control .item {
     line-height: 31px;
 }
+
+#source {
+    display: none;
+}

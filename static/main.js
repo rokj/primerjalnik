@@ -62,7 +62,10 @@ function changeProduct(productId) {
     document.getElementById("product-prices").innerHTML = pricesTableBody;
      */
 
-    document.getElementById("source").setAttribute('href', product['url']);
+    if (product["url"] != "") {
+        document.getElementById("source").setAttribute('href', product['url']);
+        document.getElementById("source").classList.add("d-block");
+    }
 
     const ctx = document.getElementById('pc-chart');
     if (chart) {
