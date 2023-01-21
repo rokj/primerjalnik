@@ -34,6 +34,9 @@ db.row_factory = sqlite3.Row
 cur = db.execute("select id, url, name, store from products where sync_from_internet = 1")
 products = cur.fetchall()
 
+print("--- START IMPORTING PRICES ---")
+print(datetime.datetime.now())
+
 total = len(products)
 i = 1
 for p in products:
@@ -74,3 +77,6 @@ for p in products:
             insert_price(p["id"], product_price.text(), datetime.date.today())
 
 db.close()
+
+print(datetime.datetime.now())
+print("--- END IMPORTING PRICES ---")
