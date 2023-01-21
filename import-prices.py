@@ -43,6 +43,8 @@ for p in products:
     if r.status_code == 302:
         print("will omit this one since its redirecting {0}".format(p["url"]))
         continue
+    elif r.status_code != 200:
+        print("check website {0}".format(p["url"]))
 
     base_pq = PyQuery(r.content)
 
