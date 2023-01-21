@@ -68,9 +68,6 @@ for p in products:
         product_name = base_pq("#main .article h1")
         product_price = base_pq("#main .article .buy-module .price-discounted strong")
 
-        print(product_name.text())
-        print(p["name"])
-
         update_product_name(p["id"], product_name.text(), p["name"])
         if product_price and product_price is not None:
             insert_price(p["id"], product_price.text(), datetime.date.today())
