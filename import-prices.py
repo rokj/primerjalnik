@@ -7,7 +7,7 @@ from pyquery import PyQuery
 def update_product_name(product_id, name, current_product_name):
     global db
 
-    if current_product_name == "" or current_product_name is None and (name is not None and name != ""):
+    if (current_product_name == "" or current_product_name is None) and (name is not None and name != ""):
         db.execute("update products set name = ? where id = ?", [
             name,
             product_id
@@ -67,6 +67,9 @@ for p in products:
     elif p["store"] == "Tuš":
         product_name = base_pq("#main .article h1")
         product_price = base_pq("#main .article .buy-module .price-discounted strong")
+
+        print(product_name.text())
+        print(p["name"])
 
         update_product_name(p["id"], product_name.text(), p["name"])
         if product_price and product_price is not None:
