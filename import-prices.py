@@ -37,6 +37,8 @@ products = cur.fetchall()
 total = len(products)
 i = 1
 for p in products:
+    print("doing {0}/{1} {2}".format(i, total, p["url"]))
+
     if p["store"] == "Špar":
         r = requests.get(p["url"])
         base_pq = PyQuery(r.content)
@@ -45,7 +47,8 @@ for p in products:
         product_price = base_pq(".productMainDetails .productDetailsPrice")
 
         update_product_name(p["id"], product_name.attr("title"), p["name"])
-        insert_price(p["id"], product_price.text(), datetime.date.today())
+        if product_price and product_price is not None:
+            insert_price(p["id"], product_price.attr("data-baseprice"), datetime.date.today())
 
     elif p["store"] == "Mercator":
         r = requests.get(p["url"])
@@ -55,7 +58,8 @@ for p in products:
         product_price = base_pq(".productHolder .price-box .price")
 
         update_product_name(p["id"], product_name.text(), p["name"])
-        insert_price(p["id"], product_price.text(), datetime.date.today())
+        if product_price and product_price is not None:
+            insert_price(p["id"], product_price.text(), datetime.date.today())
 
     elif p["store"] == "Tuš":
         r = requests.get(p["url"])
@@ -65,9 +69,9 @@ for p in products:
         product_price = base_pq("#main .article .buy-module .price-discounted strong")
 
         update_product_name(p["id"], product_name.text(), p["name"])
-        insert_price(p["id"], product_price.text(), datetime.date.today())
+        if product_price and product_price is not None:
+            insert_price(p["id"], product_price.text(), datetime.date.today())
 
-    print("doing {0}/{1}".format(i, total))
     i += 1
 
 db.close()
