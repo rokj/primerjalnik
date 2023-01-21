@@ -39,10 +39,14 @@ i = 1
 for p in products:
     print("doing {0}/{1} {2}".format(i, total, p["url"]))
 
-    if p["store"] == "Špar":
-        r = requests.get(p["url"])
-        base_pq = PyQuery(r.content)
+    r = requests.get(p["url"], allow_redirects=False)
+    if r.status_code == 302:
+        print("will omit this one since its redirecting {0}".format(p["url"]))
+        continue
 
+    base_pq = PyQuery(r.content)
+
+    if p["store"] == "Špar":
         product_name = base_pq(".productMainDetails .productDetailsName")
         product_price = base_pq(".productMainDetails .productDetailsPrice")
 
@@ -51,9 +55,6 @@ for p in products:
             insert_price(p["id"], product_price.attr("data-baseprice"), datetime.date.today())
 
     elif p["store"] == "Mercator":
-        r = requests.get(p["url"])
-        base_pq = PyQuery(r.content)
-
         product_name = base_pq(".productHolder h1")
         product_price = base_pq(".productHolder .price-box .price")
 
@@ -62,9 +63,6 @@ for p in products:
             insert_price(p["id"], product_price.text(), datetime.date.today())
 
     elif p["store"] == "Tuš":
-        r = requests.get(p["url"])
-        base_pq = PyQuery(r.content)
-
         product_name = base_pq("#main .article h1")
         product_price = base_pq("#main .article .buy-module .price-discounted strong")
 
