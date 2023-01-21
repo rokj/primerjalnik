@@ -38,6 +38,7 @@ total = len(products)
 i = 1
 for p in products:
     print("doing {0}/{1} {2}".format(i, total, p["url"]))
+    i += 1
 
     r = requests.get(p["url"], allow_redirects=False)
     if r.status_code == 302:
@@ -71,7 +72,5 @@ for p in products:
         update_product_name(p["id"], product_name.text(), p["name"])
         if product_price and product_price is not None:
             insert_price(p["id"], product_price.text(), datetime.date.today())
-
-    i += 1
 
 db.close()
