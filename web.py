@@ -16,15 +16,18 @@ def get_db():
         db = g._database = sqlite3.connect(DATABASE)
     return db
 
+
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
 
+
 def make_dicts(cursor, row):
     return dict((cursor.description[idx][0], value)
                 for idx, value in enumerate(row))
+
 
 def query_db(query, args=(), one=False):
     db = get_db()
@@ -38,16 +41,20 @@ def query_db(query, args=(), one=False):
 @app.route("/")
 def index():
     # let us show something
-    tmp_products = query_db("select id, url, name from products where show = 1")
+    tmp_products = query_db("select id, url, name, store from products where show = 1")
     products = {}
 
     for p in tmp_products:
         prices = query_db("select price, price_date from prices where product_id = ? order by price_date asc", [p["id"]])
+        store = ""
+        if p["store"]:
+            store = p["store"]
 
         products[p["id"]] = {
             "id": p["id"],
             "name": p["name"],
             "url": p["url"],
+            "store": store,
             "prices": prices
         }
 

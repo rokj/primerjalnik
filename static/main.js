@@ -86,8 +86,24 @@ new TomSelect("#select-product", {
 		option_create: function(data, escape) {
 			return '<div class="create">Dodaj <strong>' + escape(data.input) + '</strong>&hellip;</div>';
 		},
-		no_results: function(data,escape){
-			return '<div class="no-results">Ni najdenih besed za "'+escape(data.input)+'"</div>';
+		no_results: function(data, escape) {
+			return '<div class="no-results">Ni najdenih besed za "' + escape(data.input) + '"</div>';
+		},
+        option: function(data, escape) {
+            let store = "";
+            if (data.store != "") {
+                if (data.store == "Špar") {
+                    store = 'spar';
+                } else if (data.store == "Mercator") {
+                    store = 'mercator';
+                } else if (data.store == "Tuš") {
+                    store = 'tus';
+                }
+
+                store = '<span class="store ' + store + '"></span>';
+            }
+
+			return '<div>' + escape(data.text) + store  +'</div>';
 		},
     }
 });

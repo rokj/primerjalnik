@@ -34,3 +34,27 @@
 #source {
     display: none;
 }
+
+.option .store.tus {
+    display: inline-block;
+    height: 20px;
+    width: 31px;
+    margin-left: 5px;
+    background-image: url("/static/img/logo-tus.png");
+}
+
+.option .store.mercator {
+    display: inline-block;
+    height: 20px;
+    width: 19px;
+    margin-left: 5px;
+    background-image: url("/static/img/logo-mercator.png");
+}
+
+.option .store.spar {
+    display: inline-block;
+    height: 20px;
+    width: 22px;
+    margin-left: 5px;
+    background-image: url("/static/img/logo-spar.png");
+}
