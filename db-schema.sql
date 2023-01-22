@@ -45,4 +45,5 @@ insert into products(url, name, sync_from_internet) values ('https://www.stat.si
 insert into products(url, name, sync_from_internet) values ('https://www.stat.si/StatWeb/Field/Index/5/30?4', 'Cena zemeljskega plina za negospodinjstva', 0);
 
 alter table products add column show int default 1;
+alter table products add column quantity int default 1;
 

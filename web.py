@@ -41,11 +41,11 @@ def query_db(query, args=(), one=False):
 @app.route("/")
 def index():
     # let us show something
-    tmp_products = query_db("select id, url, name, store from products where show = 1")
+    tmp_products = query_db("select id, url, name, store, quantity from products where show = 1")
     products = {}
 
     for p in tmp_products:
-        prices = query_db("select price, price_date from prices where product_id = ? order by price_date asc", [p["id"]])
+        prices = query_db("select price * ? as price, price_date from prices where product_id = ? order by price_date asc", [p["quantity"], p["id"]])
         store = ""
         if p["store"]:
             store = p["store"]
