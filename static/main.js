@@ -67,6 +67,9 @@ function changeProduct(productId) {
         document.getElementById("source").classList.add("d-block");
     }
 
+    document.getElementById("store").innerHTML = product["store"] != "" ? "trgovina " + product["store"] : "";
+    document.getElementById("current-price").innerHTML = prices.length > 0 ? "trenutna cena " + prices.at(-1) : "";
+
     const ctx = document.getElementById('pc-chart');
     if (chart) {
         chart.destroy();
