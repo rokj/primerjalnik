@@ -15,7 +15,7 @@ Spletna stran se nahaja na https://primerjalnik-cen.si
 - python
 - flask
 - sqlite3
-- js > ES6
+- js > es6
 - bootstrap
 - KISS
 
