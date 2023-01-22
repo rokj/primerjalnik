@@ -45,7 +45,7 @@ def index():
     products = {}
 
     for p in tmp_products:
-        prices = query_db("select price * ? as price, price_date from prices where product_id = ? order by price_date asc", [p["quantity"], p["id"]])
+        prices = query_db("select price, price_date from prices where product_id = ? order by price_date asc", [p["id"]])
         store = ""
         if p["store"]:
             store = p["store"]
@@ -54,6 +54,7 @@ def index():
             "id": p["id"],
             "name": p["name"],
             "url": p["url"],
+            "quantity": p["quantity"],
             "store": store,
             "prices": prices
         }

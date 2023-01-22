@@ -1,9 +1,12 @@
 function justDates(value) {
-    return value["price_date"]
+    return value["price_date"];
 }
 
-function justPrices(value) {
-    return value["price"]
+function justPrices(value, quantity) {
+    let price = value["price"] * quantity;
+    price = Math.round((price + Number.EPSILON) * 100) / 100;
+
+    return price;
 }
 
 function changeProduct(productId) {
@@ -13,7 +16,7 @@ function changeProduct(productId) {
     }
 
     let dates = product["prices"].map(justDates);
-    let prices = product["prices"].map(justPrices);
+    let prices = product["prices"].map(element => justPrices(element, product["quantity"]));
 
     const labels = dates;
     const data = {
