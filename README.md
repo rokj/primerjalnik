@@ -31,7 +31,7 @@ Ko imate kodo enkrat pri sebi, lahko zaženete strežnik z naslednjim ukazom:
 
 Želite pomagati in imate zgodovino cen nekaterih artiklov ali storitev v neki Excel ali pa CSV datoteki?
 
-Lahko jo prilagodite na naslednji način in jo date v Issue:
+Lahko jo prilagodite na naslednji način in jo date v https://github.com/rokj/primerjalnik/issues:
 | url  | datum cene | cena |
 | ------------- | ---------- | ------------- |
 | https://trgovina.mercator.si/market/izdelek/17294885/kislo-zelje-mercator-1-kg | 2023-01-21 | 1.11 |
