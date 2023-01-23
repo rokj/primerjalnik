@@ -32,7 +32,7 @@ function changeProduct(productId) {
 
     let y_text = "€";
     if (product["name"].includes("Inflacija")) {
-	y_text = "%";
+	    y_text = "%";
     }
 
     const config = {
@@ -49,7 +49,7 @@ function changeProduct(productId) {
                     display: true,
                     title: {
                         display: true,
-                        text: "€"
+                        text: y_text
                     }
                 },
                 x: {
@@ -76,7 +76,7 @@ function changeProduct(productId) {
     }
 
     document.getElementById("store").innerHTML = product["store"] != "" ? "trgovina " + product["store"] : "";
-    document.getElementById("current-price").innerHTML = prices.length > 0 ? "trenutna cena " + prices.at(-1) + " " + y_text : "";
+    document.getElementById("current-price").innerHTML = prices.length > 0 ? "trenutna vrednost " + prices.at(-1) + " " + y_text : "";
 
     const ctx = document.getElementById('pc-chart');
     if (chart) {
