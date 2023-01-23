@@ -15,7 +15,7 @@ Spletna stran se nahaja na https://primerjalnik-cen.si
 - python
 - flask
 - sqlite3
-- vannila js, dokler bo šlo
+- js > es6
 - bootstrap
 - KISS
 
@@ -28,6 +28,18 @@ Ko imate kodo enkrat pri sebi, lahko zaženete strežnik z naslednjim ukazom:
 2. odprite brskalnik na naslednjem naslovu `http://127.0.0.1:5000`
 
 # Uvoz podatkov (novih produktov, storitev, ...)
+
+Želite pomagati in imate zgodovino cen nekaterih artiklov ali storitev v neki Excel ali pa CSV datoteki?
+
+Lahko jo prilagodite na naslednji način in jo date v https://github.com/rokj/primerjalnik/issues:
+| url  | datum cene | cena |
+| ------------- | ---------- | ------------- |
+| https://trgovina1/izdelek/17294885/kislo-zelje-mercator-1-kg | 2023-01-21 | 1.11 |
+| https://trgovina1/izdelek/17294885/kislo-zelje-mercator-1-kg | 2023-01-22 | 1.12 |
+| https://trgovina1/izdelek/17294885/kislo-zelje-mercator-1-kg | 2023-01-23 | 1.13 |
+| https://trgovina2/izdelek/17645533/piscancji-zrezki-mercator-pakirano-500-g-ik | 2023-02-11 | 2.11 |
+| https://trgovina2/izdelek/17645533/piscancji-zrezki-mercator-pakirano-500-g-ik | 2023-02-12 | 2.12 |
+| https://trgovina2/izdelek/17645533/piscancji-zrezki-mercator-pakirano-500-g-ik | 2023-02-13 | 2.13 |
 
 
 
