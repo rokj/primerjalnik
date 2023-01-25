@@ -10,15 +10,6 @@
     padding-top: 1%;
 }
 
-#pc-chart {
-}
-
-#select-product-wrapper {
-}
-
-#select-product-ts-control {
-}
-
 .ts-wrapper {
     height: 50px;
 }
@@ -61,4 +52,31 @@
 
 #product-info #store, #product-info #current-price {
     display: block;
+}
+
+.select-product-wrapper {
+    position: relative;
+}
+
+.compare {
+    position: absolute;
+    right: -45px;
+    width: 36px;
+    height: 36px;
+    background-image: url("/static/img/icon-compare-2.svg");
+    background-size: contain;
+    top: 7px;
+}
+
+.compare:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.hide {
+    display: none !important;
+}
+
+.select-product-base:nth-child(2) {
+    padding-top: 10px;
 }

@@ -2,6 +2,7 @@ import datetime
 import sqlite3
 import requests
 from pyquery import PyQuery
+from decimal import Decimal
 
 
 def update_product_name(product_id, name, current_product_name):
@@ -16,6 +17,20 @@ def update_product_name(product_id, name, current_product_name):
         db.commit()
 
 
+def parse_price(product_price):
+    price = product_price.replace("€", "").replace(",", ".")
+
+    if price == "":
+        raise Exception
+
+    price = Decimal(price)
+
+    if price == 0:
+        raise Exception
+
+    return price
+
+
 def insert_price(product_id, product_price, price_date):
     global db
 
@@ -28,10 +43,12 @@ def insert_price(product_id, product_price, price_date):
     ])
     db.commit()
 
+    return True
+
 
 db = sqlite3.connect('db.db')
 db.row_factory = sqlite3.Row
-cur = db.execute("select id, url, name, store from products where sync_from_internet = 1")
+cur = db.execute('select id, url, name, store from products where sync_from_internet = 1 and store in ("Špar", "Mercator", "Tuš")')
 products = cur.fetchall()
 
 print("--- START IMPORTING PRICES ---")
@@ -53,28 +70,25 @@ for p in products:
     base_pq = PyQuery(r.content)
 
     if p["store"] == "Špar":
-        product_name = base_pq(".productMainDetails .productDetailsName")
-        product_price = base_pq(".productMainDetails .productDetailsPrice")
-
-        update_product_name(p["id"], product_name.attr("title"), p["name"])
-        if product_price and product_price is not None:
-            insert_price(p["id"], product_price.attr("data-baseprice"), datetime.date.today())
+        product_name = base_pq(".productMainDetails .productDetailsName").attr("title")
+        product_price = parse_price(base_pq(".productMainDetails .productDetailsPrice")).attr("data-baseprice")
 
     elif p["store"] == "Mercator":
-        product_name = base_pq(".productHolder h1")
-        product_price = base_pq(".productHolder .price-box .price")
-
-        update_product_name(p["id"], product_name.text(), p["name"])
-        if product_price and product_price is not None:
-            insert_price(p["id"], product_price.text(), datetime.date.today())
+        product_name = base_pq(".productHolder h1").text()
+        product_price = base_pq(".productHolder .price-box .price").text()
 
     elif p["store"] == "Tuš":
-        product_name = base_pq("#main .article h1")
-        product_price = base_pq("#main .article .buy-module .price-discounted strong")
+        product_name = base_pq("#main .article h1").text()
+        product_price = base_pq("#main .article .buy-module .price-discounted strong").text()
 
-        update_product_name(p["id"], product_name.text(), p["name"])
-        if product_price and product_price is not None:
-            insert_price(p["id"], product_price.text(), datetime.date.today())
+    try:
+        price = parse_price(product_price)
+    except Exception:
+        print("WARN could not get price for {0}".format(p["url"]))
+        continue
+
+    update_product_name(p["id"], product_name, p["name"])
+    insert_price(p["id"], price, datetime.date.today())
 
 db.close()
 

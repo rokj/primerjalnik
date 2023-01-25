@@ -1,3 +1,22 @@
+let chart = null;
+let secondTomSelectShown = false;
+let firstProductId = null;
+let secondProductId = null;
+
+// when we click compare button, we hide or show next tom select element
+let compare = document.querySelector(".compare");
+compare.addEventListener("click", () => {
+    if (! secondTomSelectShown) {
+        document.querySelector(".select-product-base:nth-child(2)").classList.remove("hide");
+        secondTomSelectShown = true;
+
+        return;
+    }
+
+    document.querySelector(".select-product-base:nth-child(2)").classList.add("hide");
+    secondTomSelectShown = false;
+});
+
 function justDates(value) {
     return value["price_date"];
 }
@@ -9,36 +28,65 @@ function justPrices(value, quantity) {
     return price;
 }
 
-function changeProduct(productId) {
-    let product = products[productId];
-    if (!product) {
-        return;
+function showCharts() {
+    let product1 = products[firstProductId];
+    let product2 = secondTomSelectShown ? products[secondProductId] : null;
+
+    let dates1 = product1["prices"].map(justDates);
+    let dates2 = product2 ? product2["prices"].map(justDates) : null;
+    let prices1 = product1["prices"].map(element => justPrices(element, product1["quantity"]));
+    let prices2 = product2 ? product2["prices"].map(element => justPrices(element, product2["quantity"])) : [];
+
+    let datasets = [];
+    let dataSet1 = {
+        label: 'prvi',
+        data: prices1,
+        fill: false,
+        borderColor: '#36a2eb',
+        tension: 0.1,
+        labels: dates1
+    };
+    datasets.push(dataSet1);
+
+    if (secondTomSelectShown) {
+        let dataSet2 = {
+            label: 'drugi',
+            data: prices2,
+            fill: false,
+            borderColor: '#eb3636',
+            tension: 0.1,
+            labels: dates2
+        }
+
+        datasets.push(dataSet2);
     }
 
-    let dates = product["prices"].map(justDates);
-    let prices = product["prices"].map(element => justPrices(element, product["quantity"]));
-
-    const labels = dates;
     const data = {
-        labels: labels,
-        datasets: [{
-            label: '',
-            data: prices,
-            fill: false,
-            borderColor: '#36a2eb',
-            tension: 0.1
-        }]
+        labels: dates1,
+        datasets: datasets
     };
 
     let y_text = "€";
-    if (product["name"].includes("Inflacija")) {
+    if (product1["name"].includes("Inflacija")) {
 	    y_text = "%";
+    }
+
+    if (secondTomSelectShown && (
+        product1["name"].includes("Inflacija") || product2["name"].includes("Inflacija")
+    )) {
+        y_text = "€ oz. %";
     }
 
     const config = {
         type: 'line',
         data: data,
         options: {
+            responsive: true,
+            interaction: {
+              mode: 'index',
+              intersect: false,
+            },
+            stacked: false,
             plugins: {
                 legend: {
                     display: false
@@ -64,42 +112,45 @@ function changeProduct(productId) {
     };
 
     /*
-    document.getElementById("product-name").textContent = product["name"].substring(0, 40) + " ... ";
-
-    let pricesTableBody = product["prices"].map(p => "<tr><td>" + p["price_date"] + "</td><td>" + p["price"] + "</td></tr>").join('');
-    document.getElementById("product-prices").innerHTML = pricesTableBody;
-     */
-
     if (product["url"] != "") {
-        document.getElementById("source").setAttribute('href', product['url']);
-        document.getElementById("source").classList.add("d-block");
+        document.querySelector("#source").setAttribute('href', product['url']);
+        document.querySelector("#source").classList.add("d-block");
     }
 
-    document.getElementById("store").innerHTML = product["store"] != "" ? "trgovina " + product["store"] : "";
-    document.getElementById("current-price").innerHTML = prices.length > 0 ? "trenutna vrednost " + prices.at(-1) + " " + y_text : "";
+    document.querySelector("#store").innerHTML = product["store"] != "" ? "trgovina " + product["store"] : "";
+    document.querySelector("#current-price").innerHTML = prices.length > 0 ? "trenutna vrednost " + prices.at(-1) + " " + y_text : "";
+     */
 
-    const ctx = document.getElementById('pc-chart');
+    const ctx = document.querySelector('#pc-chart');
     if (chart) {
         chart.destroy();
     }
     chart = new Chart(ctx, config);
 }
 
-new TomSelect("#select-product", {
-	create: true,
+function changeProduct2(productId) {
+    secondProductId = productId;
+    showCharts();
+}
+
+let firstTomSelect = new TomSelect(".select-product-1", {
+    create: true,
     responsive: true,
-	sortField: {
-		field: "text",
-		direction: "asc"
-	},
-    onChange: changeProduct,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    },
+    onChange: (productId) => {
+        firstProductId = productId;
+        showCharts();
+    },
     render: {
-		option_create: function(data, escape) {
-			return '<div class="create">Dodaj <strong>' + escape(data.input) + '</strong>&hellip;</div>';
-		},
-		no_results: function(data, escape) {
-			return '<div class="no-results">Ni najdenih besed za "' + escape(data.input) + '"</div>';
-		},
+        option_create: function(data, escape) {
+            return '<div class="create">Dodaj <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+        },
+        no_results: function(data, escape) {
+            return '<div class="no-results">Ni najdenih besed za "' + escape(data.input) + '"</div>';
+        },
         option: function(data, escape) {
             let store = "";
             if (data.store != "") {
@@ -114,9 +165,44 @@ new TomSelect("#select-product", {
                 store = '<span class="store ' + store + '"></span>';
             }
 
-			return '<div>' + escape(data.text) + store  +'</div>';
-		},
+            return '<div>' + escape(data.text) + store  +'</div>';
+        },
     }
 });
 
-let chart = null;
+let secondTomSelect = new TomSelect(".select-product-2", {
+    create: true,
+    responsive: true,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    },
+    onChange: (productId) => {
+        secondProductId = productId;
+        showCharts();
+    },
+    render: {
+        option_create: function(data, escape) {
+            return '<div class="create">Dodaj <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+        },
+        no_results: function(data, escape) {
+            return '<div class="no-results">Ni najdenih besed za "' + escape(data.input) + '"</div>';
+        },
+        option: function(data, escape) {
+            let store = "";
+            if (data.store != "") {
+                if (data.store == "Špar") {
+                    store = 'spar';
+                } else if (data.store == "Mercator") {
+                    store = 'mercator';
+                } else if (data.store == "Tuš") {
+                    store = 'tus';
+                }
+
+                store = '<span class="store ' + store + '"></span>';
+            }
+
+            return '<div>' + escape(data.text) + store  +'</div>';
+        },
+    }
+});
