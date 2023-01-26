@@ -15,54 +15,51 @@ compare.addEventListener("click", () => {
 
     document.querySelector(".select-product-base:nth-child(2)").classList.add("hide");
     secondTomSelectShown = false;
+    secondProductId = null;
+
+    showCharts();
 });
 
-function justDates(value) {
-    return value["price_date"];
-}
-
-function justPrices(value, quantity) {
+function justPriceAndDates(value, quantity) {
     let price = value["price"] * quantity;
     price = Math.round((price + Number.EPSILON) * 100) / 100;
 
-    return price;
+    return {x: value["price_date"], y: price};
 }
 
+// multiple lines, multiple labels https://stackoverflow.com/questions/49489670/chart-js-displaying-multiple-line-charts-using-multiple-labels
 function showCharts() {
     let product1 = products[firstProductId];
     let product2 = secondTomSelectShown ? products[secondProductId] : null;
 
-    let dates1 = product1["prices"].map(justDates);
-    let dates2 = product2 ? product2["prices"].map(justDates) : null;
-    let prices1 = product1["prices"].map(element => justPrices(element, product1["quantity"]));
-    let prices2 = product2 ? product2["prices"].map(element => justPrices(element, product2["quantity"])) : [];
+    let prices1 = product1["prices"].map(element => justPriceAndDates(element, product1["quantity"]));
+    let prices2 = product2 ? product2["prices"].map(element => justPriceAndDates(element, product2["quantity"])) : [];
 
     let datasets = [];
     let dataSet1 = {
-        label: 'prvi',
+        label: product1["name"],
         data: prices1,
         fill: false,
+        showLine: true,
         borderColor: '#36a2eb',
         tension: 0.1,
-        labels: dates1
     };
     datasets.push(dataSet1);
 
     if (secondTomSelectShown) {
         let dataSet2 = {
-            label: 'drugi',
+            label: product2["name"],
             data: prices2,
             fill: false,
+            showLine: true,
             borderColor: '#eb3636',
             tension: 0.1,
-            labels: dates2
         }
 
         datasets.push(dataSet2);
     }
 
     const data = {
-        labels: dates1,
         datasets: datasets
     };
 
@@ -81,33 +78,14 @@ function showCharts() {
         type: 'line',
         data: data,
         options: {
-            responsive: true,
-            interaction: {
-              mode: 'index',
-              intersect: false,
+            tooltips: {
+                mode: 'index',
+                intersect: false,
             },
-            stacked: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
+            hover: {
+                mode: 'nearest',
+                intersect: true
             },
-            scales: {
-                y: {
-                    display: true,
-                    title: {
-                        display: true,
-                        text: y_text
-                    }
-                },
-                x: {
-                    display: true,
-                    title: {
-                        display: true,
-                        text: "datum"
-                    }
-                }
-            }
         }
     };
 
@@ -126,11 +104,6 @@ function showCharts() {
         chart.destroy();
     }
     chart = new Chart(ctx, config);
-}
-
-function changeProduct2(productId) {
-    secondProductId = productId;
-    showCharts();
 }
 
 let firstTomSelect = new TomSelect(".select-product-1", {
