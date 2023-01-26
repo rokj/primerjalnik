@@ -16,6 +16,7 @@ compare.addEventListener("click", () => {
     document.querySelector(".select-product-base:nth-child(2)").classList.add("hide");
     secondTomSelectShown = false;
     secondProductId = null;
+    secondTomSelect.clear();
 
     showCharts();
 });
