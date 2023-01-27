@@ -87,24 +87,72 @@ function showCharts() {
                 mode: 'nearest',
                 intersect: true
             },
+            scales: {
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: y_text
+                    }
+                },
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: "datum"
+                    }
+                }
+            }
         }
     };
-
-    /*
-    if (product["url"] != "") {
-        document.querySelector("#source").setAttribute('href', product['url']);
-        document.querySelector("#source").classList.add("d-block");
-    }
-
-    document.querySelector("#store").innerHTML = product["store"] != "" ? "trgovina " + product["store"] : "";
-    document.querySelector("#current-price").innerHTML = prices.length > 0 ? "trenutna vrednost " + prices.at(-1) + " " + y_text : "";
-     */
 
     const ctx = document.querySelector('#pc-chart');
     if (chart) {
         chart.destroy();
     }
     chart = new Chart(ctx, config);
+
+    let currency_1 = "€";
+    if (product1["name"].includes("Inflacija")) {
+	    currency_1 = "%";
+    }
+
+    if (product1["url"] != "") {
+        document.querySelector("#source-a").setAttribute('href', product1['url']);
+    }
+
+    document.querySelector("#product-a").classList.remove("hide");
+    document.querySelector("#name-a").innerHTML = product1["name"];
+    document.querySelector("#store-a").innerHTML = product1["store"] != "" ? "trgovina " + product1["store"] : "";
+    document.querySelector("#current-price-a").innerHTML = prices1.length > 0 ? "trenutna vrednost " + prices1.at(-1).y + " " + currency_1 : "";
+
+    if (secondTomSelectShown) {
+        let currency_2 = "€";
+        if (product2["name"].includes("Inflacija")) {
+            currency_2 = "%";
+        }
+
+        if (product2["url"] != "") {
+            document.querySelector("#source-b").setAttribute('href', product2['url']);
+        }
+
+        document.querySelector("#product-b").classList.remove("hide");
+        document.querySelector("#product-a .title").classList.remove("hide");
+
+        document.querySelectorAll(".select-product-wrapper .title").forEach((item) => {
+            item.classList.remove("hide");
+        });
+
+        document.querySelector("#name-b").innerHTML = product2["name"];
+        document.querySelector("#store-b").innerHTML = product2["store"] != "" ? "trgovina " + product2["store"] : "";
+        document.querySelector("#current-price-b").innerHTML = prices2.length > 0 ? "trenutna vrednost " + prices2.at(-1).y + " " + currency_2 : "";
+    } else {
+        document.querySelector("#product-b").classList.add("hide");
+        document.querySelector("#product-a .title").classList.add("hide");
+        document.querySelectorAll(".select-product-wrapper .title").forEach((item) => {
+            item.classList.add("hide");
+        });
+    }
 }
 
 let firstTomSelect = new TomSelect(".select-product-1", {

@@ -50,10 +50,6 @@
     background-image: url("/static/img/logo-spar.png");
 }
 
-#product-info #store, #product-info #current-price {
-    display: block;
-}
-
 .select-product-wrapper {
     position: relative;
 }
@@ -77,10 +73,41 @@
     display: none !important;
 }
 
+.hide {
+    display: block;
+}
+
 .select-product-base:nth-child(2) {
     padding-top: 10px;
 }
 
 .ts-dropdown .option {
     text-align: left;
+}
+
+.product-info-base {
+    padding-top: 40px;
+}
+
+.product-info-base > div {
+    display: flex;
+    text-align: center;
+}
+
+.product {
+    display: block;
+    flex: 1;
+}
+
+.product-info-base .title, .select-product-wrapper .title {
+    font-size: 24px;
+}
+
+.select-product-wrapper .title {
+    position: absolute;
+    left: -38px;
+    width: 36px;
+    height: 36px;
+    top: 7px;
+    text-align: center;
 }

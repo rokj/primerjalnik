@@ -27,6 +27,7 @@
         <div class="select-product-base row height d-flex justify-content-center align-items-center">
             <div class="col-md-6">
                 <div class="select-product-wrapper">
+                    <div class="title hide">A</div>
                     <select placeholder="Izberi artikel..." autocomplete="off" class="select-product select-product-1">
                         <option value="">Izberi artikel...</option>
                         {% for k, v in products.items() %}
@@ -41,6 +42,7 @@
         <div class="select-product-base row height d-flex justify-content-center align-items-center hide">
             <div class="col-md-6">
                 <div class="select-product-wrapper">
+                    <div class="title hide">B</div>
                     <select placeholder="Izberi artikel..." autocomplete="off" class="select-product select-product-2">
                         <option value="">Izberi artikel...</option>
                         {% for k, v in products.items() %}
@@ -52,38 +54,28 @@
         </div>
 
         <div class="row height d-flex justify-content-center align-items-center">
-            <div id="product-info" class="col-md-6">
-                <a href="" id="source" target="_blank">vir</a>
-                <span id="store"></span>
-                <span id="current-price"></span>
+            <div class="col-md-6">
+                <canvas id="pc-chart" width="400" height="300"></canvas>
             </div>
         </div>
 
-        {% if product %}
-            <!--
-            <h1 id="product-name">{{ product["name"] }}</h1>
-
-            <table>
-                <thead>
-                    <tr>
-                        <td>Datum</td>
-                        <td>Cena</td>
-                    </tr>
-                </thead>
-                <tbody id="product-prices">
-                    {% for price in product["prices"] %}
-                        <tr>
-                            <td>{{ price["price_date"] }}</td>
-                            <td>{{ price["price"] }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            -->
-        {% endif %}
-        <div class="row height d-flex justify-content-center align-items-center">
+        <div class="product-info-base row height d-flex justify-content-center align-items-center">
             <div class="col-md-6">
-                <canvas id="pc-chart" width="400" height="300"></canvas>
+                <div id="product-a" class="col-md-6 product hide">
+                    <div class="title">A</div>
+                    <div id="name-a"></div>
+                    <div id="store-a"></div>
+                    <div id="current-price-a"></div>
+                    <a href="" id="source-a" target="_blank">vir</a>
+                </div>
+
+                <div id="product-b" class="col-md-6 product hide">
+                    <div class="title">B</div>
+                    <div id="name-b"></div>
+                    <div id="store-b"></div>
+                    <div id="current-price-b"></div>
+                    <a href="" id="source-b" target="_blank">vir</a>
+                </div>
             </div>
         </div>
     </div>
