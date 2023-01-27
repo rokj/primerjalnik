@@ -34,14 +34,12 @@ def parse_price(product_price):
 def insert_price(product_id, product_price, price_date):
     global db
 
-    db.execute("insert into prices(product_id, price, price_date) values (?, ?, ?)", [
+    db.execute("insert into prices(product_id, price, price_date) values (?, ?, ?)", (
         product_id,
-        product_price,
-        price_date
-    ])
+        str(product_price),
+        price_date,
+    ))
     db.commit()
-
-    return True
 
 
 db = sqlite3.connect('db.db')
@@ -62,14 +60,17 @@ for p in products:
     if r.status_code == 302:
         print("WARN will omit this one since its redirecting {0}".format(p["url"]))
         continue
+    elif r.status_code == 301:
+        print("WARN will omit this one since it moved permanently {0}".format(p["url"]))
+        continue
     elif r.status_code != 200:
-        print("WARN maybe something fishy for getting product price from {0}".format(p["url"]))
+        print("WARN getting status {1}. maybe something fishy for getting product price from {0}".format(p["url"], r.status_code))
 
     base_pq = PyQuery(r.content)
 
     if p["store"] == "Špar":
         product_name = base_pq(".productMainDetails .productDetailsName").attr("title")
-        product_price = parse_price(base_pq(".productMainDetails .productDetailsPrice").attr("data-baseprice"))
+        product_price = base_pq(".productMainDetails .productDetailsPrice").attr("data-baseprice")
 
     elif p["store"] == "Mercator":
         product_name = base_pq(".productHolder h1").text()
