@@ -71,7 +71,7 @@ for p in products:
 
     if p["store"] == "Špar":
         product_name = base_pq(".productMainDetails .productDetailsName").attr("title")
-        product_price = parse_price(base_pq(".productMainDetails .productDetailsPrice")).attr("data-baseprice")
+        product_price = parse_price(base_pq(".productMainDetails .productDetailsPrice").attr("data-baseprice"))
 
     elif p["store"] == "Mercator":
         product_name = base_pq(".productHolder h1").text()
