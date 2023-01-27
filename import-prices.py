@@ -80,6 +80,8 @@ for p in products:
     elif p["store"] == "Tuš":
         product_name = base_pq("#main .article h1").text()
         product_price = base_pq("#main .article .buy-module .price-discounted strong").text()
+    else:
+        continue
 
     try:
         price = parse_price(product_price)
