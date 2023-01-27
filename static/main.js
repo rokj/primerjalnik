@@ -189,6 +189,22 @@ let firstTomSelect = new TomSelect(".select-product-1", {
 
             return '<div>' + escape(data.text) + store  +'</div>';
         },
+		item: function(data, escape) {
+            let store = "";
+            if (data.store != "") {
+                if (data.store == "Špar") {
+                    store = 'spar';
+                } else if (data.store == "Mercator") {
+                    store = 'mercator';
+                } else if (data.store == "Tuš") {
+                    store = 'tus';
+                }
+
+                store = '<span class="store ' + store + '"></span>';
+            }
+
+            return '<div>' + escape(data.text) + store  +'</div>';
+		}
     }
 });
 
