@@ -34,11 +34,9 @@ def parse_price(product_price):
 def insert_price(product_id, product_price, price_date):
     global db
 
-    price = product_price.replace("€", "").replace(",", ".")
-
     db.execute("insert into prices(product_id, price, price_date) values (?, ?, ?)", [
         product_id,
-        price,
+        product_price,
         price_date
     ])
     db.commit()
