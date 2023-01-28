@@ -46,6 +46,10 @@ def index():
 
     for p in tmp_products:
         prices = query_db("select price, price_date from prices where product_id = ? order by price_date asc", [p["id"]])
+
+        if len(prices) == 0:
+            continue
+
         store = ""
         if p["store"]:
             store = p["store"]
