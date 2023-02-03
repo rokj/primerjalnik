@@ -46,4 +46,13 @@ insert into products(url, name, sync_from_internet) values ('https://www.stat.si
 
 alter table products add column show int default 1;
 alter table products add column quantity int default 1;
+alter table products add column ean text default '';
+create index ean_index ON products(ean);
 
+create table products_history(
+	id integer primary key autoincrement,
+	ref_id integer,
+	data text not null,
+	action_after text,
+	created_at datetime default current_timestamp
+);

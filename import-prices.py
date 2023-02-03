@@ -1,20 +1,11 @@
 import datetime
+import json
 import sqlite3
 import requests
 from pyquery import PyQuery
 from decimal import Decimal
-
-
-def update_product_name(product_id, name, current_product_name):
-    global db
-
-    if (current_product_name == "" or current_product_name is None) and (name is not None and name != ""):
-        db.execute("update products set name = ? where id = ?", [
-            name,
-            product_id
-        ])
-
-        db.commit()
+from common import update_product_name, insert_price
+import sys
 
 
 def parse_price(product_price):
@@ -29,17 +20,6 @@ def parse_price(product_price):
         raise Exception
 
     return price
-
-
-def insert_price(product_id, product_price, price_date):
-    global db
-
-    db.execute("insert into prices(product_id, price, price_date) values (?, ?, ?)", (
-        product_id,
-        str(product_price),
-        price_date,
-    ))
-    db.commit()
 
 
 db = sqlite3.connect('db.db')
@@ -88,8 +68,8 @@ for p in products:
         print("WARN could not get price for {0}".format(p["url"]))
         continue
 
-    update_product_name(p["id"], product_name, p["name"])
-    insert_price(p["id"], price, datetime.date.today())
+    update_product_name(db, p["id"], product_name, p["name"])
+    insert_price(db, p["id"], price, datetime.date.today())
 
 db.close()
 
