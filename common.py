@@ -16,7 +16,7 @@ def trigger(db, table, id, action):
 
 def update_product_name(db, product_id, name, current_product_name):
     if name != current_product_name:
-        trigger('products', product_id, 'update')
+        trigger(db, 'products', product_id, 'update')
         db.execute("update products set name = ? where id = ?", [
             name,
             product_id
