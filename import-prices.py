@@ -44,12 +44,14 @@ for p in products:
         print("WARN will omit this one since it moved permanently {0}".format(p["url"]))
         continue
     elif r.status_code != 200:
-        print("WARN getting status {1}. maybe something fishy for getting product price from {0}".format(p["url"], r.status_code))
+        print("WARN getting status {1}. could not get product price from {0}".format(p["url"], r.status_code))
 
     base_pq = PyQuery(r.content)
 
     if p["store"] == "Špar":
-        product_name = base_pq(".productMainDetails .productDetailsName").attr("title")
+        product_name = base_pq(".productMainDetails .productDetailsName")
+        product_name(".productDescription").remove()
+        product_name = product_name.text()
         product_price = base_pq(".productMainDetails .productDetailsPrice").attr("data-baseprice")
 
     elif p["store"] == "Mercator":
