@@ -155,6 +155,31 @@ function showCharts() {
     }
 }
 
+function option_item_render(data, escape) {
+    let store = "";
+    if (data.store != "") {
+        if (data.store == "Špar") {
+            store = 'spar';
+        } else if (data.store == "Mercator") {
+            store = 'mercator';
+        } else if (data.store == "Tuš") {
+            store = 'tus';
+        }
+
+        store = '<span class="store ' + store + '"></span>';
+    }
+
+    return '<div>' + escape(data.text) + store  +'</div>';
+}
+
+function option_create_render(data, escape) {
+    return '<div class="create">Dodaj <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+}
+
+function option_no_results_render(data, escape) {
+    return '<div class="no-results">Ni najdenih besed za "' + escape(data.input) + '"</div>';
+}
+
 let firstTomSelect = new TomSelect(".select-product-1", {
     create: true,
     responsive: true,
@@ -167,44 +192,10 @@ let firstTomSelect = new TomSelect(".select-product-1", {
         showCharts();
     },
     render: {
-        option_create: function(data, escape) {
-            return '<div class="create">Dodaj <strong>' + escape(data.input) + '</strong>&hellip;</div>';
-        },
-        no_results: function(data, escape) {
-            return '<div class="no-results">Ni najdenih besed za "' + escape(data.input) + '"</div>';
-        },
-        option: function(data, escape) {
-            let store = "";
-            if (data.store != "") {
-                if (data.store == "Špar") {
-                    store = 'spar';
-                } else if (data.store == "Mercator") {
-                    store = 'mercator';
-                } else if (data.store == "Tuš") {
-                    store = 'tus';
-                }
-
-                store = '<span class="store ' + store + '"></span>';
-            }
-
-            return '<div>' + escape(data.text) + store  +'</div>';
-        },
-		item: function(data, escape) {
-            let store = "";
-            if (data.store != "") {
-                if (data.store == "Špar") {
-                    store = 'spar';
-                } else if (data.store == "Mercator") {
-                    store = 'mercator';
-                } else if (data.store == "Tuš") {
-                    store = 'tus';
-                }
-
-                store = '<span class="store ' + store + '"></span>';
-            }
-
-            return '<div>' + escape(data.text) + store  +'</div>';
-		}
+        option_create: option_create_render,
+        no_results: option_no_results_render,
+        option: option_item_render,
+		item: option_item_render
     }
 });
 
@@ -220,27 +211,9 @@ let secondTomSelect = new TomSelect(".select-product-2", {
         showCharts();
     },
     render: {
-        option_create: function(data, escape) {
-            return '<div class="create">Dodaj <strong>' + escape(data.input) + '</strong>&hellip;</div>';
-        },
-        no_results: function(data, escape) {
-            return '<div class="no-results">Ni najdenih besed za "' + escape(data.input) + '"</div>';
-        },
-        option: function(data, escape) {
-            let store = "";
-            if (data.store != "") {
-                if (data.store == "Špar") {
-                    store = 'spar';
-                } else if (data.store == "Mercator") {
-                    store = 'mercator';
-                } else if (data.store == "Tuš") {
-                    store = 'tus';
-                }
-
-                store = '<span class="store ' + store + '"></span>';
-            }
-
-            return '<div>' + escape(data.text) + store  +'</div>';
-        },
+        option_create: option_create_render,
+        no_results: option_no_results_render,
+        option: option_item_render,
+		item: option_item_render
     }
 });
