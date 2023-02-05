@@ -259,6 +259,7 @@ let firstTomSelect = new TomSelect(".select-product-1", {
         field: "text",
         direction: "asc"
     },
+    maxOptions: null,
     onChange: (productId) => {
         firstProductId = productId;
         showCharts();
