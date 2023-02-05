@@ -28,13 +28,83 @@ function justPriceAndDates(value, quantity) {
     return {x: value["price_date"], y: price};
 }
 
+function compareByDate(a, b) {
+  if (Date.parse(a.x) < Date.parse(b.x)) {
+    return -1;
+  }
+  if (Date.parse(a.x) > Date.parse(b.x)) {
+    return 1;
+  }
+  return 0;
+}
+
+function fillTable(t1, t2) {
+    for (const p1 of t1) {
+        let inside = false;
+        for (const p2 of t2) {
+            if (p1.x == p2.x) {
+                inside = true;
+                break;
+            }
+        }
+
+        if (!inside) {
+            t2.push({x: p1.x, y: null})
+        }
+    }
+
+    return t2;
+}
+
+function setEmptyToLastPrice(prices) {
+    let i = 1;
+    let last_index_with_price = -1;
+    while (i < prices.length) {
+        if (prices[i].y) {
+            last_index_with_price = i;
+        }
+
+        i++;
+    }
+
+    i = 1;
+    while (i < prices.length) {
+        if (!prices[i].y && (last_index_with_price >= i)) {
+            prices[i].y = prices[i-1].y;
+        }
+
+        i++;
+    }
+
+    return prices;
+}
+
+function fillMissingPrices(prices1, prices2) {
+    if (prices2.length == 0) {
+        return {prices1, prices2};
+    }
+
+    prices2 = fillTable(prices1, prices2);
+    prices1 = fillTable(prices2, prices1);
+
+    prices1.sort(compareByDate);
+    prices2.sort(compareByDate);
+
+    // prices1 = setEmptyToLastPrice(prices1);
+    // prices2 = setEmptyToLastPrice(prices2);
+
+    return {prices1: prices1, prices2: prices2}
+}
+
 // multiple lines, multiple labels https://stackoverflow.com/questions/49489670/chart-js-displaying-multiple-line-charts-using-multiple-labels
 function showCharts() {
     let product1 = products[firstProductId];
     let product2 = secondTomSelectShown ? products[secondProductId] : null;
 
-    let prices1 = product1["prices"].map(element => justPriceAndDates(element, product1["quantity"]));
-    let prices2 = product2 ? product2["prices"].map(element => justPriceAndDates(element, product2["quantity"])) : [];
+    let tmp_prices1 = product1["prices"].map(element => justPriceAndDates(element, product1["quantity"]));
+    let tmp_prices2 = product2 ? product2["prices"].map(element => justPriceAndDates(element, product2["quantity"])) : [];
+
+    const {prices1, prices2} = fillMissingPrices(tmp_prices1, tmp_prices2);
 
     let datasets = [];
     let dataSet1 = {
@@ -48,16 +118,18 @@ function showCharts() {
     datasets.push(dataSet1);
 
     if (secondTomSelectShown) {
-        let dataSet2 = {
-            label: product2["name"],
-            data: prices2,
-            fill: false,
-            showLine: true,
-            borderColor: '#eb3636',
-            tension: 0.1,
-        }
+        if (product2) {
+            let dataSet2 = {
+                label: product2["name"],
+                data: prices2,
+                fill: false,
+                showLine: true,
+                borderColor: '#eb3636',
+                tension: 0.1,
+            }
 
-        datasets.push(dataSet2);
+            datasets.push(dataSet2);
+        }
     }
 
     const data = {
