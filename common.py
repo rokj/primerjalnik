@@ -1,4 +1,5 @@
 import json
+from decimal import Decimal
 
 
 def trigger(db, table, id, action):
@@ -32,3 +33,17 @@ def insert_price(db, product_id, product_price, price_date):
         price_date,
     ))
     db.commit()
+
+
+def parse_price(product_price):
+    price = product_price.replace("€", "").replace(",", ".")
+
+    if price == "":
+        raise Exception
+
+    price = Decimal(price)
+
+    if price == 0:
+        raise Exception
+
+    return price

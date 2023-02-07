@@ -56,7 +56,7 @@ function fillTable(t1, t2) {
     return t2;
 }
 
-function setEmptyToLastPrice(prices) {
+function setNoPriceToLastPrice(prices) {
     let i = 1;
     let last_index_with_price = -1;
     while (i < prices.length) {
@@ -90,8 +90,8 @@ function fillMissingPrices(prices1, prices2) {
     prices1.sort(compareByDate);
     prices2.sort(compareByDate);
 
-    // prices1 = setEmptyToLastPrice(prices1);
-    // prices2 = setEmptyToLastPrice(prices2);
+    prices1 = setNoPriceToLastPrice(prices1);
+    prices2 = setNoPriceToLastPrice(prices2);
 
     return {prices1: prices1, prices2: prices2}
 }

@@ -1,26 +1,8 @@
 import datetime
-import json
 import sqlite3
 import requests
 from pyquery import PyQuery
-from decimal import Decimal
-from common import update_product_name, insert_price
-import sys
-
-
-def parse_price(product_price):
-    price = product_price.replace("€", "").replace(",", ".")
-
-    if price == "":
-        raise Exception
-
-    price = Decimal(price)
-
-    if price == 0:
-        raise Exception
-
-    return price
-
+from common import update_product_name, insert_price, parse_price
 
 db = sqlite3.connect('db.db')
 db.row_factory = sqlite3.Row

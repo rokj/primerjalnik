@@ -66,3 +66,43 @@ def index():
     product = products[1]
 
     return render_template('index.html', products=products, product=product)
+
+@app.route("/visje-cene")
+def changes():
+    # let us show something
+    tmp_products = query_db("select id, url, name, store, quantity from products where show = 1")
+    products = {}
+
+    for p in tmp_products:
+        prices = query_db("select price, price_date from prices where product_id = ? order by price_date asc", [p["id"]])
+
+        if len(prices) == 0:
+            continue
+
+        changes = [prices[0]]
+        for price in prices:
+            if price["price"] != changes[-1]["price"]:
+                changes.append(price)
+
+        for c in changes:
+            c["price"] = c["price"] * p["quantity"]
+
+        if len(changes) <= 1:
+            continue
+
+        store = ""
+        if p["store"]:
+            store = p["store"]
+
+        products[p["id"]] = {
+            "id": p["id"],
+            "name": p["name"],
+            "url": p["url"],
+            "quantity": p["quantity"],
+            "store": store,
+            "changes": changes
+        }
+
+    print(products)
+
+    return render_template('visje-cene.html', products=products)
