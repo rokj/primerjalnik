@@ -128,6 +128,10 @@ function showCharts() {
                 tension: 0.1,
             }
 
+            if (product1["unit"] != product2["unit"]) {
+                dataSet2["yAxisID"] = 'y1'
+            }
+
             datasets.push(dataSet2);
         }
     }
@@ -136,18 +140,8 @@ function showCharts() {
         datasets: datasets
     };
 
-    let y_text = "€";
-    if (product1["name"].includes("Inflacija")) {
-	    y_text = "%";
-    }
-
-    if (secondTomSelectShown && (
-        product1["name"].includes("Inflacija") || product2["name"].includes("Inflacija")
-    )) {
-        y_text = "€ oz. %";
-    }
-
     const config = {
+        responsive: true,
         type: 'line',
         data: data,
         options: {
@@ -164,7 +158,7 @@ function showCharts() {
                     display: true,
                     title: {
                         display: true,
-                        text: y_text
+                        text: secondTomSelectShown && (product1["unit"] != product2["unit"]) ? product1["name"] + " (" + product1["unit"] + ")" : product1["unit"]
                     }
                 },
                 x: {
@@ -173,8 +167,24 @@ function showCharts() {
                         display: true,
                         text: "datum"
                     }
+                },
+            }
+            /* ,
+            plugins: {
+                zoom: {
+                    zoom: {
+                        wheel: {
+                            enabled: true,
+                            speed: 0.1,
+                        },
+                        mode: 'x',
+                        speed: 0.1,
+                        threshold: 1,
+                        sensitivity: 1,
+                    }
                 }
             }
+            */
         }
     };
 
@@ -199,9 +209,16 @@ function showCharts() {
     document.querySelector("#current-price-a").innerHTML = prices1.length > 0 ? "trenutna vrednost " + prices1.at(-1).y + " " + currency_1 : "";
 
     if (secondTomSelectShown) {
-        let currency_2 = "€";
-        if (product2["name"].includes("Inflacija")) {
-            currency_2 = "%";
+        if (product1["unit"] != product2["unit"]) {
+            config["options"]["scales"]["y1"] = {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                title: {
+                    display: true,
+                    text: product2["name"] + " (" + product2["unit"] + ")"
+                }
+            }
         }
 
         if (product2["url"] != "") {
@@ -217,7 +234,7 @@ function showCharts() {
 
         document.querySelector("#name-b").innerHTML = product2["name"];
         document.querySelector("#store-b").innerHTML = product2["store"] != "" ? "trgovina " + product2["store"] : "";
-        document.querySelector("#current-price-b").innerHTML = prices2.length > 0 ? "trenutna vrednost " + prices2.at(-1).y + " " + currency_2 : "";
+        document.querySelector("#current-price-b").innerHTML = prices2.length > 0 && prices2.at(-1).y != null ? "trenutna vrednost " + prices2.at(-1).y + " " + product2["unit"] : "";
     } else {
         document.querySelector("#product-b").classList.add("hide");
         document.querySelector("#product-a .title").classList.add("hide");

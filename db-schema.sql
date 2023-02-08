@@ -60,3 +60,5 @@ create table products_history(
 insert into products(url, name, sync_from_internet, store) values ('https://www.energetika-portal.si/podrocja/energetika/cene-naftnih-derivatov/regulirane-cene-naftnih-derivatov/?1', 'Bencin (NMB-95)', 1, 'www.energetika-portal.si');
 insert into products(url, name, sync_from_internet, store) values ('https://www.energetika-portal.si/podrocja/energetika/cene-naftnih-derivatov/regulirane-cene-naftnih-derivatov/?2', 'Dizelsko gorivo', 1, 'www.energetika-portal.si');
 insert into products(url, name, sync_from_internet, store) values ('https://www.energetika-portal.si/podrocja/energetika/cene-naftnih-derivatov/regulirane-cene-naftnih-derivatov/?3', 'Kurilno olje (ekstra lahko ELKO)', 1, 'www.energetika-portal.si');
+
+alter table products add column unit text default '€';

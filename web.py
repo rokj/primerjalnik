@@ -41,7 +41,7 @@ def query_db(query, args=(), one=False):
 @app.route("/")
 def index():
     # let us show something
-    tmp_products = query_db("select id, url, name, store, quantity from products where show = 1")
+    tmp_products = query_db("select id, url, name, store, quantity, unit from products where show = 1")
     products = {}
 
     for p in tmp_products:
@@ -60,7 +60,8 @@ def index():
             "url": p["url"],
             "quantity": p["quantity"],
             "store": store,
-            "prices": prices
+            "prices": prices,
+            "unit": p["unit"]
         }
 
     product = products[1]
@@ -102,7 +103,5 @@ def changes():
             "store": store,
             "changes": changes
         }
-
-    print(products)
 
     return render_template('visje-cene.html', products=products)
