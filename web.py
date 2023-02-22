@@ -38,6 +38,52 @@ def query_db(query, args=(), one=False):
     return (rv[0] if rv else None) if one else rv
 
 
+def higher_prices(higher=True):
+    # let us show something
+    tmp_products = query_db("select id, url, name, store, quantity from products where show = 1")
+    products = {}
+
+    for p in tmp_products:
+        prices = query_db("select price, price_date from prices where product_id = ? order by price_date asc", [p["id"]])
+
+        if len(prices) <= 1:
+            continue
+
+        if higher:
+            if prices[-1]["price"] <= prices[0]["price"]:
+                continue
+        else:
+            if prices[-1]["price"] >= prices[0]["price"]:
+                continue
+
+        changes = [prices[0]]
+        for price in prices:
+            if price["price"] != changes[-1]["price"]:
+                changes.append(price)
+
+        for c in changes:
+            c["price"] = c["price"] * p["quantity"]
+
+        if len(changes) <= 1:
+            continue
+
+        store = ""
+        if p["store"]:
+            store = p["store"]
+
+        products[p["id"]] = {
+            "id": p["id"],
+            "name": p["name"],
+            "url": p["url"],
+            "quantity": p["quantity"],
+            "store": store,
+            "changes": changes
+        }
+
+    return render_template('visje-cene.html', products=products, higher=higher)
+
+
+
 @app.route("/")
 def index():
     # let us show something
@@ -69,39 +115,9 @@ def index():
     return render_template('index.html', products=products, product=product)
 
 @app.route("/visje-cene")
-def changes():
-    # let us show something
-    tmp_products = query_db("select id, url, name, store, quantity from products where show = 1")
-    products = {}
+def higher_changes():
+    return higher_prices(True)
 
-    for p in tmp_products:
-        prices = query_db("select price, price_date from prices where product_id = ? order by price_date asc", [p["id"]])
-
-        if len(prices) == 0:
-            continue
-
-        changes = [prices[0]]
-        for price in prices:
-            if price["price"] != changes[-1]["price"]:
-                changes.append(price)
-
-        for c in changes:
-            c["price"] = c["price"] * p["quantity"]
-
-        if len(changes) <= 1:
-            continue
-
-        store = ""
-        if p["store"]:
-            store = p["store"]
-
-        products[p["id"]] = {
-            "id": p["id"],
-            "name": p["name"],
-            "url": p["url"],
-            "quantity": p["quantity"],
-            "store": store,
-            "changes": changes
-        }
-
-    return render_template('visje-cene.html', products=products)
+@app.route("/nizje-cene")
+def lower_changes():
+    return higher_prices(False)

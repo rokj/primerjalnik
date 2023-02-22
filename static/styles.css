@@ -144,3 +144,27 @@
     top: 7px;
     text-align: center;
 }
+
+.logos {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+#github {
+    width: 30px;
+    height: 30px;
+    background-image: url("/static/img/github-mark.png");
+    display: block;
+    background-size: cover;
+}
+
+body {
+    margin-top: 30px;
+}
+
+.higher-lower-prices-links {
+    padding: 10px;
+}

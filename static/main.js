@@ -7,13 +7,13 @@ let secondProductId = null;
 let compare = document.querySelector(".compare");
 compare.addEventListener("click", () => {
     if (! secondTomSelectShown) {
-        document.querySelector(".select-product-base:nth-child(2)").classList.remove("hide");
+        document.querySelector(".select-product-base-2").classList.remove("hide");
         secondTomSelectShown = true;
 
         return;
     }
 
-    document.querySelector(".select-product-base:nth-child(2)").classList.add("hide");
+    document.querySelector(".select-product-base-2").classList.add("hide");
     secondTomSelectShown = false;
     secondProductId = null;
     secondTomSelect.clear();
@@ -98,6 +98,10 @@ function fillMissingPrices(prices1, prices2) {
 
 // multiple lines, multiple labels https://stackoverflow.com/questions/49489670/chart-js-displaying-multiple-line-charts-using-multiple-labels
 function showCharts() {
+    if (! firstProductId) {
+        return;
+    }
+
     let product1 = products[firstProductId];
     let product2 = secondTomSelectShown ? products[secondProductId] : null;
 
