@@ -170,3 +170,27 @@ body {
 .higher-lower-prices-links {
     padding: 10px;
 }
+
+table.price-changes .price-info {
+    position: relative;
+}
+
+table.price-changes .price, table.price-changes .price-date, table.price-changes .change-percent {
+    display: inline-block;
+    clear: both;
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+
+table.price-changes .old-price, table.price-changes .new-price {
+    text-align: center;
+}
+
+table.price-changes .price-date {
+    font-size: 12px;
+}
+
+table.price-changes .change-percent {
+    font-size: 12px;
+}

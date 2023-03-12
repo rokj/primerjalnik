@@ -2,24 +2,28 @@ let chart = null;
 let secondTomSelectShown = false;
 let firstProductId = null;
 let secondProductId = null;
+let firstTomSelect = null;
+let secondTomSelect = null;
 
 // when we click compare button, we hide or show next tom select element
 let compare = document.querySelector(".compare");
-compare.addEventListener("click", () => {
-    if (! secondTomSelectShown) {
-        document.querySelector(".select-product-base-2").classList.remove("hide");
-        secondTomSelectShown = true;
+if (compare) {
+    compare.addEventListener("click", () => {
+        if (!secondTomSelectShown) {
+            document.querySelector(".select-product-base-2").classList.remove("hide");
+            secondTomSelectShown = true;
 
-        return;
-    }
+            return;
+        }
 
-    document.querySelector(".select-product-base-2").classList.add("hide");
-    secondTomSelectShown = false;
-    secondProductId = null;
-    secondTomSelect.clear();
+        document.querySelector(".select-product-base-2").classList.add("hide");
+        secondTomSelectShown = false;
+        secondProductId = null;
+        secondTomSelect.clear();
 
-    showCharts();
-});
+        showCharts();
+    });
+}
 
 function justPriceAndDates(value, quantity) {
     let price = value["price"] * quantity;
@@ -273,41 +277,45 @@ function option_no_results_render(data, escape) {
     return '<div class="no-results">Ni najdenih besed za "' + escape(data.input) + '"</div>';
 }
 
-let firstTomSelect = new TomSelect(".select-product-1", {
-    create: true,
-    responsive: true,
-    sortField: {
-        field: "text",
-        direction: "asc"
-    },
-    maxOptions: null,
-    onChange: (productId) => {
-        firstProductId = productId;
-        showCharts();
-    },
-    render: {
-        option_create: option_create_render,
-        no_results: option_no_results_render,
-        option: option_item_render,
-		item: option_item_render
-    }
-});
+if (compare) {
+    firstTomSelect = new TomSelect(".select-product-1", {
+        create: true,
+        responsive: true,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        },
+        maxOptions: null,
+        onChange: (productId) => {
+            firstProductId = productId;
+            showCharts();
+        },
+        render: {
+            option_create: option_create_render,
+            no_results: option_no_results_render,
+            option: option_item_render,
+            item: option_item_render
+        }
+    });
+}
 
-let secondTomSelect = new TomSelect(".select-product-2", {
-    create: true,
-    responsive: true,
-    sortField: {
-        field: "text",
-        direction: "asc"
-    },
-    onChange: (productId) => {
-        secondProductId = productId;
-        showCharts();
-    },
-    render: {
-        option_create: option_create_render,
-        no_results: option_no_results_render,
-        option: option_item_render,
-		item: option_item_render
-    }
-});
+if (compare) {
+    secondTomSelect = new TomSelect(".select-product-2", {
+        create: true,
+        responsive: true,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        },
+        onChange: (productId) => {
+            secondProductId = productId;
+            showCharts();
+        },
+        render: {
+            option_create: option_create_render,
+            no_results: option_no_results_render,
+            option: option_item_render,
+            item: option_item_render
+        }
+    });
+}

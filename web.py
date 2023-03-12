@@ -67,6 +67,11 @@ def higher_prices(higher=True):
         if len(changes) <= 1:
             continue
 
+        v1 = changes[0]["price"]
+        v2 = changes[-1]["price"]
+
+        change_percent = ((v2-v1)/abs(v1))*100
+
         store = ""
         if p["store"]:
             store = p["store"]
@@ -77,7 +82,8 @@ def higher_prices(higher=True):
             "url": p["url"],
             "quantity": p["quantity"],
             "store": store,
-            "changes": changes
+            "changes": changes,
+            "change_percent": change_percent,
         }
 
     return render_template('visje-cene.html', products=products, higher=higher)

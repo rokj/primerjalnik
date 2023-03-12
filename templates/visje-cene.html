@@ -5,10 +5,10 @@
 {% endblock %}
 {% block body %}
     <h2 class="text-center">{% if higher %}Višje cene{% else %}Nižje cene{% endif %}</h2>
-    <table class="table">
-        <tr><td>&nbsp;</td><td>Trgovina</td><td>Stara cena</td><td>Nova cena</td></tr>
+    <table class="table price-changes">
+        <tr><td>&nbsp;</td><td>Trgovina</td><td class="old-price">Stara cena</td><td class="new-price">Nova cena</td></tr>
         {% for k, v in products.items() %}
-            <tr><td><a href="{{ v["url"] }}" target="_blank">{{ v["name"] }}</a></td><td>{{ v["store"] }}</td><td>{{ v["changes"][0]["price"]|round(2) }} €</td><td>{{ v["changes"][-1]["price"]|round(2) }} €</td></tr>
+            <tr><td><a href="{{ v["url"] }}" target="_blank">{{ v["name"] }}</a></td><td>{{ v["store"] }}</td><td class="price-info"><span class="price">{{ v["changes"][0]["price"]|round(2) }} €</span><span class="price-date">{{ v["changes"][0]["price_date"] }}</span></span></td><td class="price-info"><span class="price">{{ v["changes"][-1]["price"]|round(2) }} €</span><span class="price-date">{{ v["changes"][-1]["price_date"] }}</span><span class="change-percent">({{ v["change_percent"]|round(2) }}%)</span></td></tr>
         {% endfor %}
     </table>
 {% endblock %}
