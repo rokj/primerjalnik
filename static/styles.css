@@ -159,6 +159,8 @@
     background-image: url("/static/img/github-mark.png");
     display: block;
     background-size: cover;
+    position: fixed;
+    bottom: 21px;
 }
 
 body {
