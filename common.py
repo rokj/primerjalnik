@@ -15,6 +15,10 @@ def trigger(db, table, id, action):
         db.commit()
 
 
+def insert_product(db, url, name):
+    db.execute("insert into products(url, name, show, sync_from_internet, store) values(?, ?, ?, ?, 'Mercator')", [url, name, 0, 1])
+    db.commit()
+
 def update_product_name(db, product_id, name, current_product_name):
     if name != current_product_name:
         trigger(db, 'products', product_id, 'update')
@@ -33,6 +37,14 @@ def insert_price(db, product_id, product_price, price_date):
         price_date,
     ))
     db.commit()
+
+
+def get_product_by_url(db, url):
+    cur = db.execute("select * from products where url = ?", (url,))
+    if cur:
+        return cur.fetchone()
+
+    return None
 
 
 def parse_price(product_price):
