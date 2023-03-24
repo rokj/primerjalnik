@@ -15,8 +15,8 @@ def trigger(db, table, id, action):
         db.commit()
 
 
-def insert_product(db, url, name):
-    db.execute("insert into products(url, name, show, sync_from_internet, store) values(?, ?, ?, ?, 'Mercator')", [url, name, 0, 1])
+def insert_product(db, url, name, store):
+    db.execute("insert into products(url, name, show, sync_from_internet, store) values(?, ?, ?, ?, ?)", [url, name, 0, 1, store])
     db.commit()
 
 def update_product_name(db, product_id, name, current_product_name):
