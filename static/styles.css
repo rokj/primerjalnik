@@ -194,3 +194,15 @@ table.price-changes .price-date {
 table.price-changes .change-percent {
     font-size: 12px;
 }
+
+.price-changes-bar a.active {
+    background-color: #e8e8e8;
+    padding: 9px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: rgb(33, 37, 41);
+}
+
+.price-changes-bar a {
+    text-decoration: none;
+}

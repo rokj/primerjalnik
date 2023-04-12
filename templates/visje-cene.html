@@ -3,13 +3,23 @@
 {% block title %}
 {% if higher %}Višje cene - Primerjalnik cen{% else %}Nižje cene - Primerjalnik cen{% endif %}
 {% endblock %}
+{% block script %}const products = JSON.parse('{{ products | tojson | safe }}');{% endblock %}
 {% block body %}
+    {% if higher %}
+        {% set higher_sl = "visje" %}
+    {% else %}
+        {% set higher_sl = "nizje" %}
+    {% endif %}
+    <h5 class="text-center"><a href="/">na prvo stran</a></h5>
     <h2 class="text-center">{% if higher %}Višje cene{% else %}Nižje cene{% endif %}</h2>
+    <div class="text-center price-changes-bar">
+        <h5>v zadnjih</h5>
+        <h3><a data-in-last="7-days" class="active" href="/{{ higher_sl }}-cene/#zadnjih-7-dneh">7 dneh</a> | <a data-in-last="30-days" href="/{{ higher_sl }}-cene/#zadnjih-30-dneh">30 dneh</a> | <a data-in-last="60-days" href="/{{ higher_sl }}-cene/#zadnjih-60-dneh">60 dneh</a> | <a data-in-last="year" href="/{{ higher_sl }}-cene/#zadnje-leto">zadnje leto</a></h3>
+    </div>
     <table class="table price-changes">
-        <tr><td>&nbsp;</td><td>Trgovina</td><td class="old-price">Stara cena</td><td class="new-price">Nova cena</td></tr>
-        {% for k, v in products.items() %}
-            <tr><td><a href="{{ v["url"] }}" target="_blank">{{ v["name"] }}</a></td><td>{{ v["store"] }}</td><td class="price-info"><span class="price">{{ v["changes"][0]["price"]|round(2) }} €</span><span class="price-date">{{ v["changes"][0]["price_date"] }}</span></span></td><td class="price-info"><span class="price">{{ v["changes"][-1]["price"]|round(2) }} €</span><span class="price-date">{{ v["changes"][-1]["price_date"] }}</span><span class="change-percent">({{ v["change_percent"]|round(2) }}%)</span></td></tr>
-        {% endfor %}
+        <thead>
+            <tr><td>&nbsp;</td><td>Trgovina</td><td class="old-price">Stara cena</td><td class="new-price">Nova cena</td></tr>
+        </thead>
+        <tbody></tbody>
     </table>
 {% endblock %}
-
