@@ -6,7 +6,7 @@ from common import update_product_name, insert_price, parse_price
 
 db = sqlite3.connect('db.db')
 db.row_factory = sqlite3.Row
-cur = db.execute('select id, url, name, store from products where sync_from_internet = 1 and store in ("www.energetika-portal.si")')
+cur = db.execute("select id, url, name, store from products where sync_from_internet = 1 and store in ('www.energetika-portal.si')")
 products = cur.fetchall()
 
 print("--- START IMPORTING NAFTA PRICES ---")
